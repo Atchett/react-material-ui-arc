@@ -3,16 +3,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 
-import ElevationScroll from "./ElevationScroll/ElevationScroll";
-import logo from "../../assets/logo.svg";
+import ElevationScroll from "./HeaderBar/ElevationScroll/ElevationScroll";
+import Logo from "./HeaderBar/Logo/Logo";
+import TabBar from "./HeaderBar/TabBar/TabBar";
 
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "3em",
-  },
-  logo: {
-    height: "7em",
   },
 }));
 
@@ -24,7 +22,8 @@ const Header = (props) => {
       <ElevationScroll>
         <AppBar position="fixed">
           <Toolbar disableGutters>
-            <img src={logo} alt="Logo" className={classes.logo} />
+            <Logo />
+            <TabBar />
           </Toolbar>
         </AppBar>
       </ElevationScroll>
