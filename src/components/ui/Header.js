@@ -4,7 +4,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 
 import ElevationScroll from "./HeaderBar/ElevationScroll/ElevationScroll";
-import Logo from "./HeaderBar/Logo/Logo";
 import TabBar from "./HeaderBar/TabBar/TabBar";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +21,6 @@ const Header = (props) => {
       <ElevationScroll>
         <AppBar position="fixed">
           <Toolbar disableGutters>
-            <Logo />
             <TabBar />
           </Toolbar>
         </AppBar>
