@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   },
   logoContainer: {
     padding: 0,
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
   },
 }));
 
@@ -23,6 +26,7 @@ const Logo = (props) => {
       to="/"
       className={classes.logoContainer}
       onClick={() => props.clickToHome(0)}
+      disableRipple
     >
       <img src={logo} alt="Logo" className={classes.logo} />
     </Button>
