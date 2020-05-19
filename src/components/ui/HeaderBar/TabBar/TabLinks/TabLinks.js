@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 const TabLinks = (props) => {
   const classes = useStyles();
-  console.log(props);
 
   const tabChangeHandler = (e, newValue) => {
     props.tabChangeHandler(newValue);
