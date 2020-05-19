@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import theme from "./ui/Theme/Theme";
 
-import Header from "./ui/Header";
+import Header from "./ui/Header/Header";
+import Footer from "./ui/Footer/Footer";
 
 const App = () => {
   return (
@@ -12,7 +13,11 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route exact path="/" component={() => <div>Home</div>} />
+          <Route
+            exact
+            path="/"
+            component={() => <div style={{ height: "100vh" }}>Home</div>}
+          />
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route
             exact
@@ -38,6 +43,7 @@ const App = () => {
           />
           <Route exact path="/estimate" component={() => <div>Estimate</div>} />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

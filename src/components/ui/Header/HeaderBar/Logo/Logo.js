@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 
-import logo from "../../../../assets/logo.svg";
+import logo from "../../../../../assets/logo.svg";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
