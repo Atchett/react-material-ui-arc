@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "1.25em",
     },
   },
+  appBar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
 }));
 
 const Header = (props) => {
@@ -25,7 +28,7 @@ const Header = (props) => {
   return (
     <Fragment>
       <ElevationScroll>
-        <AppBar position="fixed">
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar disableGutters>
             <TabBar />
           </Toolbar>

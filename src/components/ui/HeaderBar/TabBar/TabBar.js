@@ -1,50 +1,25 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+
+import TabLinks from "./TabLinks/TabLinks";
+import ResponsiveDrawer from "./ResponsiveDrawer/ResponsiveDrawer";
+import SubMenu from "./SubMenu/SubMenu";
 
 import Logo from "../Logo/Logo";
 
 const useStyles = makeStyles((theme) => ({
-  tabContainer: {
-    marginLeft: "auto",
-  },
-  tab: {
-    ...theme.typography.tab,
-    minWidth: 10,
-    marginLeft: "25px",
-  },
   button: {
     ...theme.typography.estimate,
     borderRadius: "50px",
     marginLeft: "50px",
     marginRight: "25px",
     height: "45px",
-  },
-  menu: {
-    backgroundColor: theme.palette.common.blue,
-    color: "white",
-    borderRadius: "0px",
-  },
-  menuItem: {
-    ...theme.typography.tab,
-    opacity: 0.7,
-    "&:hover": {
-      opacity: 1,
-    },
   },
   drawerIconContainer: {
     marginLeft: "auto",
@@ -67,9 +42,12 @@ const TabBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const theme = useTheme();
-  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+  const drawerOpenHandler = (isOpen) => {
+    setDrawerOpen(isOpen);
+  };
 
   const tabChangeHandler = (newValue) => {
     setTabValue(newValue);
@@ -95,165 +73,116 @@ const TabBar = () => {
     {
       name: "Services",
       link: "/services",
+      activeIndex: 1,
+      selectedIndex: 0,
     },
     {
       name: "Custom Software Development",
       link: "/customsoftware",
+      activeIndex: 1,
+      selectedIndex: 1,
     },
     {
       name: "Mobile App Development",
       link: "/mobileapps",
+      activeIndex: 1,
+      selectedIndex: 2,
     },
     {
       name: "Website Development",
       link: "/websites",
+      activeIndex: 1,
+      selectedIndex: 3,
+    },
+  ];
+
+  const routes = [
+    {
+      name: "Home",
+      link: "/",
+      activeIndex: 0,
+    },
+    {
+      name: "Services",
+      link: "/services",
+      activeIndex: 1,
+      ariaOwns: anchorEl ? "simple-menu" : undefined,
+      ariaPopup: anchorEl ? true : undefined,
+      mouseOver: (event) => handleMenuClick(event),
+    },
+    {
+      name: "The Revolution",
+      link: "/revolution",
+      activeIndex: 2,
+    },
+    {
+      name: "About Us",
+      link: "/about",
+      activeIndex: 3,
+    },
+    {
+      name: "Contact Us",
+      link: "/contact",
+      activeIndex: 4,
     },
   ];
 
   useEffect(() => {
-    const checkTabVal = (tabVal, setMenuVal = false, menuVal = 0) => {
-      if (tabValue !== tabVal) {
-        setTabValue(tabVal);
-        if (setMenuVal) {
-          setSelectedMenuIndex(menuVal);
-        }
-      }
-    };
     const pathName = window.location.pathname;
-    switch (pathName) {
-      case "/":
-        checkTabVal(0);
-        break;
-      case "/services":
-        checkTabVal(1, true);
-        break;
-      case "/customsoftware":
-        checkTabVal(1, true, 1);
-        break;
-      case "/mobileapps":
-        checkTabVal(1, true, 2);
-        break;
-      case "/websites":
-        checkTabVal(1, true, 3);
-        break;
-      case "/revolution":
-        checkTabVal(2);
-        break;
-      case "/about":
-        checkTabVal(3);
-        break;
-      case "/contact":
-        checkTabVal(4);
-        break;
-      case "/estimate":
-        checkTabVal(5);
-        break;
-      default:
-        break;
-    }
-  }, [tabValue]);
+
+    [...menuOptions, ...routes].forEach((route) => {
+      switch (pathName) {
+        case `${route.link}`:
+          if (tabValue !== route.activeIndex) {
+            tabChangeHandler(route.activeIndex);
+            if (
+              route.selectedIndex &&
+              route.selectedIndex !== selectedMenuIndex
+            ) {
+              setSelectedMenuIndex(route.selectedIndex);
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    });
+  }, [tabValue, menuOptions, routes, selectedMenuIndex]);
 
   const tabs = (
     <Fragment>
-      <Tabs
-        value={tabValue}
-        onChange={tabChangeHandler}
-        className={classes.tabContainer}
-        indicatorColor="primary"
-      >
-        <Tab className={classes.tab} component={Link} to="/" label="Home" />
-        <Tab
-          aria-owns={anchorEl ? "simple-menu" : undefined}
-          aria-haspopup={anchorEl ? true : undefined}
-          className={classes.tab}
-          component={Link}
-          onMouseOver={(event) => handleMenuClick(event)}
-          to="/services"
-          label="Services"
-        />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/revolution"
-          label="The Revolution"
-        />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/about"
-          label="About Us"
-        />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/contact"
-          label="Contact Us"
-        />
-      </Tabs>
+      <TabLinks
+        tabValue={tabValue}
+        tabChangeHandler={tabChangeHandler}
+        routes={routes}
+      />
       <Button variant="contained" color="secondary" className={classes.button}>
         Free Estimate
       </Button>
-      <Menu
-        id="simple-menu"
+      <SubMenu
         anchorEl={anchorEl}
-        open={menuOpen}
-        onClose={handleMenuClose}
-        classes={{ paper: classes.menu }}
-        MenuListProps={{ onMouseLeave: handleMenuClose }}
-        elevation={0}
-      >
-        {menuOptions.map((option, i) => (
-          <MenuItem
-            key={option}
-            component={Link}
-            to={option.link}
-            classes={{ root: classes.menuItem }}
-            onClick={(e) => {
-              handleMenuItemClick(e, i);
-              setTabValue(1);
-              handleMenuClose();
-            }}
-            selected={i === selectedMenuIndex && tabValue === 1}
-          >
-            {option.name}
-          </MenuItem>
-        ))}
-      </Menu>
+        menuOpen={menuOpen}
+        handleMenuClose={handleMenuClose}
+        menuOptions={menuOptions}
+        handleMenuItemClick={handleMenuItemClick}
+        selectedMenuIndex={selectedMenuIndex}
+        tabValue={tabValue}
+        tabChangeHandler={tabChangeHandler}
+      />
     </Fragment>
   );
 
   const drawer = (
     <Fragment>
-      <SwipeableDrawer
-        disableBackdropTransition={!iOS}
-        disableDiscovery={iOS}
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        onOpen={() => setDrawerOpen(true)}
-      >
-        <List>
-          <ListItem component={Link} to="/">
-            <ListItemText disableTypography>Home</ListItemText>
-          </ListItem>
-          <ListItem component={Link} to="/services">
-            <ListItemText disableTypography>Services</ListItemText>
-          </ListItem>
-          <ListItem component={Link} to="/revolution">
-            <ListItemText disableTypography>The Revolution</ListItemText>
-          </ListItem>
-          <ListItem component={Link} to="/about">
-            <ListItemText disableTypography>About Us</ListItemText>
-          </ListItem>
-          <ListItem component={Link} to="/contact">
-            <ListItemText disableTypography>Contact Us</ListItemText>
-          </ListItem>
-          <ListItem component={Link} to="/estimate">
-            <ListItemText disableTypography>Free Estimate</ListItemText>
-          </ListItem>
-        </List>
-      </SwipeableDrawer>
+      <ResponsiveDrawer
+        drawerOpen={drawerOpen}
+        drawerOpenHandler={drawerOpenHandler}
+        tabChangeHandler={tabChangeHandler}
+        routes={routes}
+        tabValue={tabValue}
+      />
       <IconButton
-        onClick={() => setDrawerOpen(!drawerOpen)}
+        onClick={() => drawerOpenHandler(!drawerOpen)}
         disableRipple
         className={classes.drawerIconContainer}
       >
