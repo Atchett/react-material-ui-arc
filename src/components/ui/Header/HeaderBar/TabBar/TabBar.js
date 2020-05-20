@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useCallback } from "react";
 
 import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
@@ -33,13 +33,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TabBar = () => {
+const TabBar = (props) => {
   const classes = useStyles();
-  const [tabValue, setTabValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedMenuIndex, setSelectedMenuIndex] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { value, setValue, selectedIndex, setSelectedIndex } = props;
 
   const theme = useTheme();
 
@@ -49,9 +48,9 @@ const TabBar = () => {
     setDrawerOpen(isOpen);
   };
 
-  const tabChangeHandler = (newValue) => {
-    setTabValue(newValue);
-  };
+  const tabChangeHandler = useCallback((newValue) => setValue(newValue), [
+    setValue,
+  ]);
 
   const handleMenuClick = (e) => {
     setAnchorEl(e.currentTarget);
@@ -66,7 +65,7 @@ const TabBar = () => {
   const handleMenuItemClick = (e, i) => {
     setAnchorEl(null);
     setMenuOpen(false);
-    setSelectedMenuIndex(i);
+    setSelectedIndex(i);
   };
 
   const menuOptions = [
@@ -133,13 +132,10 @@ const TabBar = () => {
     [...menuOptions, ...routes].forEach((route) => {
       switch (pathName) {
         case `${route.link}`:
-          if (tabValue !== route.activeIndex) {
+          if (value !== route.activeIndex) {
             tabChangeHandler(route.activeIndex);
-            if (
-              route.selectedIndex &&
-              route.selectedIndex !== selectedMenuIndex
-            ) {
-              setSelectedMenuIndex(route.selectedIndex);
+            if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
+              setSelectedIndex(route.selectedIndex);
             }
           }
           break;
@@ -147,12 +143,19 @@ const TabBar = () => {
           break;
       }
     });
-  }, [tabValue, menuOptions, routes, selectedMenuIndex]);
+  }, [
+    value,
+    menuOptions,
+    routes,
+    selectedIndex,
+    setSelectedIndex,
+    tabChangeHandler,
+  ]);
 
   const tabs = (
     <Fragment>
       <TabLinks
-        tabValue={tabValue}
+        tabValue={value}
         tabChangeHandler={tabChangeHandler}
         routes={routes}
       />
@@ -165,8 +168,8 @@ const TabBar = () => {
         handleMenuClose={handleMenuClose}
         menuOptions={menuOptions}
         handleMenuItemClick={handleMenuItemClick}
-        selectedMenuIndex={selectedMenuIndex}
-        tabValue={tabValue}
+        selectedMenuIndex={selectedIndex}
+        tabValue={value}
         tabChangeHandler={tabChangeHandler}
       />
     </Fragment>
@@ -179,7 +182,7 @@ const TabBar = () => {
         drawerOpenHandler={drawerOpenHandler}
         tabChangeHandler={tabChangeHandler}
         routes={routes}
-        tabValue={tabValue}
+        tabValue={value}
       />
       <IconButton
         onClick={() => drawerOpenHandler(!drawerOpen)}

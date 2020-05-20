@@ -30,7 +30,12 @@ const Header = (props) => {
       <ElevationScroll>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar disableGutters>
-            <TabBar />
+            <TabBar
+              value={props.value}
+              setValue={props.setValue}
+              selectedIndex={props.selectedIndex}
+              setSelectedIndex={props.setSelectedIndex}
+            />
           </Toolbar>
         </AppBar>
       </ElevationScroll>

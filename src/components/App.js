@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "@material-ui/styles";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -8,10 +8,18 @@ import Header from "./ui/Header/Header";
 import Footer from "./ui/Footer/Footer";
 
 const App = () => {
+  const [tabValue, setTabValue] = useState(0);
+  const [selectedMenuIndex, setSelectedMenuIndex] = useState(0);
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Header />
+        <Header
+          value={tabValue}
+          setValue={setTabValue}
+          selectedIndex={selectedMenuIndex}
+          setSelectedIndex={setSelectedMenuIndex}
+        />
         <Switch>
           <Route
             exact
@@ -43,7 +51,12 @@ const App = () => {
           />
           <Route exact path="/estimate" component={() => <div>Estimate</div>} />
         </Switch>
-        <Footer />
+        <Footer
+          value={tabValue}
+          setValue={setTabValue}
+          selectedIndex={selectedMenuIndex}
+          setSelectedIndex={setSelectedMenuIndex}
+        />
       </BrowserRouter>
     </ThemeProvider>
   );
