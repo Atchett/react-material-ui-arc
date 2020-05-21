@@ -6,6 +6,7 @@ import theme from "./ui/Theme/Theme";
 
 import Header from "./ui/Header/Header";
 import Footer from "./ui/Footer/Footer";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 const App = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -21,11 +22,7 @@ const App = () => {
           setSelectedIndex={setSelectedMenuIndex}
         />
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={() => <div style={{ height: "100vh" }}>Home</div>}
-          />
+          <Route exact path="/" component={LandingPage} />
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route
             exact
