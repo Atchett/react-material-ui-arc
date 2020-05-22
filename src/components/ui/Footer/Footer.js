@@ -29,11 +29,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
   },
   link: {
-    color: "white",
-    fontFamily: "Arial",
-    fontSize: "0.75rem",
-    fontWeight: "bold",
-    textDecoration: "none",
+    ...theme.typography.footerLink,
   },
   gridItem: {
     margin: "3em",
