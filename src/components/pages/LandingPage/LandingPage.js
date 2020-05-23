@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import HeroBlock from "./HeroBlock/HeroBlock";
+import CustomSoftware from "./CustomSoftware/CustomSoftware";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -24,6 +25,9 @@ const LandingPage = () => {
     <Grid container direction="column" className={classes.mainContainer}>
       <Grid item>
         <HeroBlock />
+      </Grid>
+      <Grid item>
+        <CustomSoftware />
       </Grid>
     </Grid>
   );

@@ -2,21 +2,45 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 const arcBlue = "#0b72b9";
 const arcOrange = "#ffba60";
+const arcGrey = "#868686";
 
 const theme = createMuiTheme({
   palette: {
     common: {
-      blue: `${arcBlue}`,
-      orange: `${arcOrange}`,
+      blue: arcBlue,
+      orange: arcOrange,
     },
     primary: {
-      main: `${arcBlue}`,
+      main: arcBlue,
     },
     secondary: {
-      main: `${arcOrange}`,
+      main: arcOrange,
     },
   },
   typography: {
+    h2: {
+      fontFamily: "Raleway",
+      fontWeight: 700,
+      fontSize: "2.5rem",
+      color: arcBlue,
+      lineHeight: 1.5,
+    },
+    h3: {
+      fontFamily: "Pacifico",
+      fontSize: "2.5rem",
+      color: arcBlue,
+    },
+    h4: {
+      fontFamily: "Raleway",
+      fontSize: "1.75rem",
+      color: arcBlue,
+      fontWeight: 700,
+    },
+    subtitle1: {
+      fontSize: "1.25rem",
+      fontWeight: 300,
+      color: arcGrey,
+    },
     tab: {
       fontFamily: "Raleway",
       textTransform: "none",
@@ -29,19 +53,15 @@ const theme = createMuiTheme({
       textTransform: "none",
       color: "white",
     },
-    learnButtonHero: {
+    learnButton: {
+      borderColor: arcBlue,
+      color: arcBlue,
+      borderWidth: 2,
+      borderRadius: 50,
       fontFamily: "Roboto",
       fontWeight: "bold",
       fontSize: "0.9rem",
       textTransform: "none",
-      color: `${arcBlue}`,
-    },
-    h2: {
-      fontFamily: "Raleway",
-      fontWeight: 700,
-      fontSize: "2.5rem",
-      color: `${arcBlue}`,
-      lineHeight: 1.5,
     },
     footerLink: {
       color: "white",

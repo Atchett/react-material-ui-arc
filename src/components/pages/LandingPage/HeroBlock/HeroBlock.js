@@ -33,10 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1em",
   },
   learnButtonHero: {
-    ...theme.typography.learnButtonHero,
-    borderColor: theme.palette.common.blue,
-    borderWidth: 2,
-    borderRadius: 50,
+    ...theme.typography.learnButton,
     height: 45,
     width: 145,
   },
