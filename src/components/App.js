@@ -22,7 +22,17 @@ const App = () => {
           setSelectedIndex={setSelectedMenuIndex}
         />
         <Switch>
-          <Route exact path="/" component={LandingPage} />
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <LandingPage
+                {...props}
+                setValue={setTabValue}
+                setSelectedIndex={setSelectedMenuIndex}
+              />
+            )}
+          />
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route
             exact
@@ -49,8 +59,6 @@ const App = () => {
           <Route exact path="/estimate" component={() => <div>Estimate</div>} />
         </Switch>
         <Footer
-          value={tabValue}
-          setValue={setTabValue}
           selectedIndex={selectedMenuIndex}
           setSelectedIndex={setSelectedMenuIndex}
         />

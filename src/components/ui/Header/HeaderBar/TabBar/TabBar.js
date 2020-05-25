@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
@@ -142,6 +143,9 @@ const TabBar = (props) => {
             }
           }
           break;
+        case "/estimate":
+          tabChangeHandler(false);
+          break;
         default:
           break;
       }
@@ -162,7 +166,14 @@ const TabBar = (props) => {
         tabChangeHandler={tabChangeHandler}
         routes={routes}
       />
-      <Button variant="contained" color="secondary" className={classes.button}>
+      <Button
+        component={Link}
+        to="/estimate"
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        onClick={() => setValue(false)}
+      >
         Free Estimate
       </Button>
       <SubMenu

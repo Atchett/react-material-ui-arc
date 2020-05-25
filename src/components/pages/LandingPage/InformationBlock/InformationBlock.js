@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InformationBlock = (props) => {
-  const { matchesXS } = props;
+  const { matchesXS, setValue } = props;
   const classes = useStyles();
   return (
     <Grid
@@ -87,7 +88,13 @@ const InformationBlock = (props) => {
             </Typography>
             <Typography variant="subtitle2">Let's get personal</Typography>
             <Grid item>
-              <Button variant="outlined" className={classes.learnButton}>
+              <Button
+                variant="outlined"
+                className={classes.learnButton}
+                component={Link}
+                to="/about"
+                onClick={() => setValue(3)}
+              >
                 <span className={classes.learnButtonSpan}>Learn More</span>
                 <ButtonArrow width={10} height={10} fill="white" />
               </Button>
@@ -106,7 +113,13 @@ const InformationBlock = (props) => {
               </span>
             </Typography>
             <Grid item>
-              <Button variant="outlined" className={classes.learnButton}>
+              <Button
+                variant="outlined"
+                className={classes.learnButton}
+                component={Link}
+                to="/contact"
+                onClick={() => setValue(4)}
+              >
                 <span className={classes.learnButtonSpan}>Learn More</span>
                 <ButtonArrow width={10} height={10} fill="white" />
               </Button>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Revolution = (props) => {
+  const { setValue } = props;
   const classes = useStyles();
   return (
     <Grid
@@ -68,7 +70,13 @@ const Revolution = (props) => {
                 Visionary insights couple with cutting-edge technology is a
                 recipe for revolution.
               </Typography>
-              <Button variant="outlined" className={classes.learnButton}>
+              <Button
+                variant="outlined"
+                className={classes.learnButton}
+                component={Link}
+                to="/revolution"
+                onClick={() => setValue(2)}
+              >
                 <span className={classes.learnButtonSpan}>Learn More</span>
                 <ButtonArrow
                   width={15}

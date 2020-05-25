@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WebsiteDevelopment = (props) => {
-  const { matchesSm, theme } = props;
+  const { matchesSm, theme, setValue, setSelectedIndex } = props;
   const classes = useStyles();
 
   return (
@@ -62,7 +63,16 @@ const WebsiteDevelopment = (props) => {
         <Typography variant="subtitle1" className={classes.subtitle}>
           Optimized for search engines, built for speed.
         </Typography>
-        <Button variant="outlined" className={classes.learnButton}>
+        <Button
+          variant="outlined"
+          className={classes.learnButton}
+          component={Link}
+          to="/websites"
+          onClick={() => {
+            setValue(1);
+            setSelectedIndex(3);
+          }}
+        >
           <span className={classes.learnButtonSpan}>Learn More</span>
           <ButtonArrow
             width={10}

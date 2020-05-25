@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LandingPage = () => {
+const LandingPage = (props) => {
+  const { setValue, setSelectedIndex } = props;
   const classes = useStyles();
   const theme = useTheme();
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -33,25 +34,40 @@ const LandingPage = () => {
   return (
     <Grid container direction="column" className={classes.mainContainer}>
       <Grid item>
-        <HeroBlock theme={theme} />
+        <HeroBlock theme={theme} setValue={setValue} />
       </Grid>
       <Grid item>
-        <CustomSoftware theme={theme} matchesSm={matchesSm} />
+        <CustomSoftware
+          theme={theme}
+          matchesSm={matchesSm}
+          setValue={setValue}
+          setSelectedIndex={setSelectedIndex}
+        />
       </Grid>
       <Grid item>
-        <AppDevelopment theme={theme} matchesSm={matchesSm} />
+        <AppDevelopment
+          theme={theme}
+          matchesSm={matchesSm}
+          setValue={setValue}
+          setSelectedIndex={setSelectedIndex}
+        />
       </Grid>
       <Grid item>
-        <WebsiteDevelopment theme={theme} matchesSm={matchesSm} />
+        <WebsiteDevelopment
+          theme={theme}
+          matchesSm={matchesSm}
+          setValue={setValue}
+          setSelectedIndex={setSelectedIndex}
+        />
       </Grid>
       <Grid item>
-        <Revolution theme={theme} />
+        <Revolution theme={theme} setValue={setValue} />
       </Grid>
       <Grid item>
-        <InformationBlock matchesXS={matchesXS} />
+        <InformationBlock matchesXS={matchesXS} setValue={setValue} />
       </Grid>
       <Grid item>
-        <CallToAction theme={theme} matchesSm={matchesSm} />
+        <CallToAction theme={theme} matchesSm={matchesSm} setValue={setValue} />
       </Grid>
     </Grid>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AppDevelopment = (props) => {
-  const { matchesSm, theme } = props;
+  const { matchesSm, theme, setValue, setSelectedIndex } = props;
   const classes = useStyles();
 
   return (
@@ -64,7 +65,16 @@ const AppDevelopment = (props) => {
           Integrate your web experience or create a standalone app
           {matchesSm ? null : <br />} with either mobile platform.
         </Typography>
-        <Button variant="outlined" className={classes.learnButton}>
+        <Button
+          variant="outlined"
+          className={classes.learnButton}
+          component={Link}
+          to="/mobileapps"
+          onClick={() => {
+            setValue(1);
+            setSelectedIndex(2);
+          }}
+        >
           <span className={classes.learnButtonSpan}>Learn More</span>
           <ButtonArrow
             width={10}

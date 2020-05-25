@@ -6,7 +6,7 @@ import animationData from "../../../../../animations/landinganimation/data";
 const LandingAnimation = () => {
   const defaultOptions = {
     loop: true,
-    autoplay: false,
+    autoplay: true,
     animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",

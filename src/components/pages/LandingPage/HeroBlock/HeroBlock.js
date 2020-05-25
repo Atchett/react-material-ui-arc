@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HeroBlock = (props) => {
+  const { setValue } = props;
   const classes = useStyles();
 
   return (
@@ -66,12 +68,24 @@ const HeroBlock = (props) => {
           className={classes.buttonContainer}
         >
           <Grid item>
-            <Button variant="contained" className={classes.estimateButton}>
+            <Button
+              variant="contained"
+              component={Link}
+              to="/estimate"
+              className={classes.estimateButton}
+              onClick={() => setValue(false)}
+            >
               Free Estimate
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="outlined" className={classes.learnButton}>
+            <Button
+              variant="outlined"
+              className={classes.learnButton}
+              component={Link}
+              to="/revolution"
+              onClick={() => setValue(2)}
+            >
               <span className={classes.learnButtonSpan}>Learn More</span>
               <ButtonArrow
                 width={15}
