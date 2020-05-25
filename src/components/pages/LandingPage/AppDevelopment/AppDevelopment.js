@@ -9,6 +9,18 @@ import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
 import mobileAppsIcon from "../../../../assets/mobileIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  learnButton: {
+    ...theme.typography.learnButton,
+    fontSize: "0.7rem",
+    height: 35,
+    padding: 5,
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "1em",
+    },
+  },
+  learnButtonSpan: {
+    marginRight: 10,
+  },
   appDevContainer: {
     marginTop: "12em",
     [theme.breakpoints.down("sm")]: {
@@ -19,15 +31,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "2em",
     [theme.breakpoints.down("xs")]: {
       textAlign: "center",
-    },
-  },
-  learnButton: {
-    ...theme.typography.learnButton,
-    fontSize: "0.7rem",
-    height: 35,
-    padding: 5,
-    [theme.breakpoints.down("xs")]: {
-      marginBottom: "1em",
     },
   },
   subtitle: {
@@ -62,7 +65,7 @@ const AppDevelopment = (props) => {
           {matchesSm ? null : <br />} with either mobile platform.
         </Typography>
         <Button variant="outlined" className={classes.learnButton}>
-          <span style={{ marginRight: 10 }}>Learn More</span>
+          <span className={classes.learnButtonSpan}>Learn More</span>
           <ButtonArrow
             width={10}
             height={10}

@@ -9,6 +9,16 @@ import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
 import customSoftwareIcon from "../../../../assets/Custom Software Icon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  learnButton: {
+    ...theme.typography.learnButton,
+    fontSize: "0.7rem",
+    height: 35,
+    padding: 5,
+    marginBottom: "1em",
+  },
+  learnButtonSpan: {
+    marginRight: 10,
+  },
   serviceContainer: {
     marginTop: "12em",
     [theme.breakpoints.down("sm")]: {
@@ -25,13 +35,6 @@ const useStyles = makeStyles((theme) => ({
   specialText: {
     fontFamily: "Pacifico",
     color: theme.palette.common.orange,
-  },
-  learnButton: {
-    ...theme.typography.learnButton,
-    fontSize: "0.7rem",
-    height: 35,
-    padding: 5,
-    marginBottom: "1em",
   },
   subtitle: {
     marginBottom: "1em",
@@ -65,7 +68,7 @@ const CustomSoftware = (props) => {
           <span className={classes.specialText}>celebration</span>.
         </Typography>
         <Button variant="outlined" className={classes.learnButton}>
-          <span style={{ marginRight: 10 }}>Learn More</span>
+          <span className={classes.learnButtonSpan}>Learn More</span>
           <ButtonArrow
             width={10}
             height={10}

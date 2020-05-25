@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     height: 45,
     width: 145,
   },
+  learnButtonSpan: {
+    marginRight: 10,
+  },
   textBlockAlign: {
     textAlign: "center",
   },
@@ -66,7 +69,7 @@ const Revolution = (props) => {
                 recipe for revolution.
               </Typography>
               <Button variant="outlined" className={classes.learnButton}>
-                <span style={{ marginRight: 10 }}>Learn More</span>
+                <span className={classes.learnButtonSpan}>Learn More</span>
                 <ButtonArrow
                   width={15}
                   height={15}

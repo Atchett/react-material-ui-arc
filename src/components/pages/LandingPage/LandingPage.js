@@ -10,6 +10,7 @@ import AppDevelopment from "./AppDevelopment/AppDevelopment";
 import WebsiteDevelopment from "./WebsiteDevelopment/WebsiteDevelopment";
 import Revolution from "./Revolution/Revolution";
 import InformationBlock from "./InformationBlock/InformationBlock";
+import CallToAction from "../AllPages/CallToAction/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -48,6 +49,9 @@ const LandingPage = () => {
       </Grid>
       <Grid item>
         <InformationBlock matchesXS={matchesXS} />
+      </Grid>
+      <Grid item>
+        <CallToAction theme={theme} matchesSm={matchesSm} />
       </Grid>
     </Grid>
   );

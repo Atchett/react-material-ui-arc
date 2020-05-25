@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     borderColor: "white",
   },
+  learnButtonSpan: {
+    marginRight: 10,
+  },
   infoBackground: {
     backgroundImage: `url(${infoBackground})`,
     backgroundPosition: "center",
@@ -85,7 +88,7 @@ const InformationBlock = (props) => {
             <Typography variant="subtitle2">Let's get personal</Typography>
             <Grid item>
               <Button variant="outlined" className={classes.learnButton}>
-                <span style={{ marginRight: 10 }}>Learn More</span>
+                <span className={classes.learnButtonSpan}>Learn More</span>
                 <ButtonArrow width={10} height={10} fill="white" />
               </Button>
             </Grid>
@@ -104,7 +107,7 @@ const InformationBlock = (props) => {
             </Typography>
             <Grid item>
               <Button variant="outlined" className={classes.learnButton}>
-                <span style={{ marginRight: 10 }}>Learn More</span>
+                <span className={classes.learnButtonSpan}>Learn More</span>
                 <ButtonArrow width={10} height={10} fill="white" />
               </Button>
             </Grid>

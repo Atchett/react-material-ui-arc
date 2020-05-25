@@ -9,6 +9,16 @@ import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
 import websiteIcon from "../../../../assets/websiteIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  learnButton: {
+    ...theme.typography.learnButton,
+    fontSize: "0.7rem",
+    height: 35,
+    padding: 5,
+    marginBottom: "1em",
+  },
+  learnButtonSpan: {
+    marginRight: 10,
+  },
   websiteContainer: {
     marginTop: "12em",
     [theme.breakpoints.down("sm")]: {
@@ -21,13 +31,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
       textAlign: "center",
     },
-  },
-  learnButton: {
-    ...theme.typography.learnButton,
-    fontSize: "0.7rem",
-    height: 35,
-    padding: 5,
-    marginBottom: "1em",
   },
   subtitle: {
     marginBottom: "1em",
@@ -60,7 +63,7 @@ const WebsiteDevelopment = (props) => {
           Optimized for search engines, built for speed.
         </Typography>
         <Button variant="outlined" className={classes.learnButton}>
-          <span style={{ marginRight: 10 }}>Learn More</span>
+          <span className={classes.learnButtonSpan}>Learn More</span>
           <ButtonArrow
             width={10}
             height={10}

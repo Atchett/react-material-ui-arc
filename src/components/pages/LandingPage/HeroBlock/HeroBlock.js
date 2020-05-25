@@ -9,6 +9,14 @@ import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
 import LandingAnimation from "./LandingAnimation/LandingAnimation";
 
 const useStyles = makeStyles((theme) => ({
+  learnButton: {
+    ...theme.typography.learnButton,
+    height: 45,
+    width: 145,
+  },
+  learnButtonSpan: {
+    marginRight: 10,
+  },
   animation: {
     maxWidth: "50em",
     minWidth: "21em",
@@ -31,11 +39,6 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonContainer: {
     marginTop: "1em",
-  },
-  learnButton: {
-    ...theme.typography.learnButton,
-    height: 45,
-    width: 145,
   },
   heroTextContainer: {
     minWidth: "21.5em",
@@ -69,7 +72,7 @@ const HeroBlock = (props) => {
           </Grid>
           <Grid item>
             <Button variant="outlined" className={classes.learnButton}>
-              <span style={{ marginRight: 10 }}>Learn More</span>
+              <span className={classes.learnButtonSpan}>Learn More</span>
               <ButtonArrow
                 width={15}
                 height={15}
