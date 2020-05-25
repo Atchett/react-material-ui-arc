@@ -27,11 +27,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    height: "100%",
+    height: "60em",
     width: "100%",
-  },
-  infoBlockPosition: {
-    position: "absolute",
     [theme.breakpoints.down("xs")]: {
       textAlign: "center",
     },
@@ -57,10 +54,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   infoTextBlock: {
-    height: "80em",
+    height: "60em",
   },
   infoHeader: {
     color: "white",
+  },
+  sectionMargin: {
+    marginBottom: 0,
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "10em",
+    },
   },
 }));
 
@@ -77,12 +80,13 @@ const InformationBlock = (props) => {
       <Grid
         item
         container
-        className={classes.infoBlockPosition}
+        className={classes.infoBackground}
         direction={matchesXS ? "column" : "row"}
-        spacing={matchesXS ? 10 : 0}
+        alignItems={matchesXS ? undefined : "center"}
+        justify={matchesXS ? "center" : undefined}
       >
         <Grid item sm className={classes.infoBlockLeft}>
-          <Grid container direction="column">
+          <Grid container direction="column" className={classes.sectionMargin}>
             <Typography variant="h2" className={classes.infoHeader}>
               About Us
             </Typography>
@@ -127,7 +131,6 @@ const InformationBlock = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <div className={classes.infoBackground} />
     </Grid>
   );
 };
