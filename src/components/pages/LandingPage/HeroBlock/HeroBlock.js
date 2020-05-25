@@ -3,7 +3,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
 import LandingAnimation from "./LandingAnimation/LandingAnimation";
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     marginTop: "1em",
   },
-  learnButtonHero: {
+  learnButton: {
     ...theme.typography.learnButton,
     height: 45,
     width: 145,
@@ -46,9 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeroBlock = () => {
+const HeroBlock = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   return (
     <Grid container direction="row" justify="flex-end" alignItems="center">
@@ -69,12 +68,12 @@ const HeroBlock = () => {
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="outlined" className={classes.learnButtonHero}>
+            <Button variant="outlined" className={classes.learnButton}>
               <span style={{ marginRight: 10 }}>Learn More</span>
               <ButtonArrow
                 width={15}
                 height={15}
-                fill={theme.palette.common.blue}
+                fill={props.theme.palette.common.blue}
               />
             </Button>
           </Grid>

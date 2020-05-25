@@ -32,7 +32,7 @@ const App = () => {
           <Route
             exact
             path="/mobileapps"
-            component={() => <div>Mobile Apps</div>}
+            component={() => <div>iOS/Android App Development</div>}
           />
           <Route exact path="/websites" component={() => <div>Websites</div>} />
           <Route

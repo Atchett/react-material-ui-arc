@@ -41,6 +41,11 @@ const theme = createMuiTheme({
       fontWeight: 300,
       color: arcGrey,
     },
+    subtitle2: {
+      fontSize: "1.25rem",
+      fontWeight: 300,
+      color: "white",
+    },
     tab: {
       fontFamily: "Raleway",
       textTransform: "none",

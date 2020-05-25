@@ -6,45 +6,42 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
-import customSoftwareIcon from "../../../../assets/Custom Software Icon.svg";
+import mobileAppsIcon from "../../../../assets/mobileIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
-  serviceContainer: {
+  appDevContainer: {
     marginTop: "12em",
     [theme.breakpoints.down("sm")]: {
       padding: 25,
     },
   },
-  serviceText: {
-    marginLeft: "5em",
+  appDevText: {
+    marginRight: "2em",
     [theme.breakpoints.down("xs")]: {
-      marginLeft: 0,
       textAlign: "center",
     },
-  },
-  specialText: {
-    fontFamily: "Pacifico",
-    color: theme.palette.common.orange,
   },
   learnButton: {
     ...theme.typography.learnButton,
     fontSize: "0.7rem",
     height: 35,
     padding: 5,
-    marginBottom: "1em",
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "1em",
+    },
   },
   subtitle: {
     marginBottom: "1em",
   },
   icon: {
-    marginLeft: "2em",
+    marginRight: "5em",
     [theme.breakpoints.down("xs")]: {
-      marginLeft: 0,
+      marginRight: 0,
     },
   },
 }));
 
-const CustomSoftware = (props) => {
+const AppDevelopment = (props) => {
   const { matchesSm, theme } = props;
   const classes = useStyles();
 
@@ -52,17 +49,17 @@ const CustomSoftware = (props) => {
     <Grid
       container
       direction="row"
-      className={classes.serviceContainer}
-      justify={matchesSm ? "center" : undefined}
+      className={classes.appDevContainer}
+      justify={matchesSm ? "center" : "flex-end"}
     >
-      <Grid item className={classes.serviceText}>
-        <Typography variant="h4">Custom Software Development</Typography>
+      <Grid item className={classes.appDevText}>
+        <Typography variant="h4">iOS/Android App Development</Typography>
         <Typography variant="subtitle1">
-          Save Energy. Save Time. Save Money.
+          Extend Functionality. Extend Access. Increase Engagement.
         </Typography>
         <Typography variant="subtitle1" className={classes.subtitle}>
-          Complete digital solutions, from investigation to{" "}
-          <span className={classes.specialText}>celebration</span>.
+          Integrate your web experience or create a standalone app
+          {matchesSm ? null : <br />} with either mobile platform.
         </Typography>
         <Button variant="outlined" className={classes.learnButton}>
           <span style={{ marginRight: 10 }}>Learn More</span>
@@ -75,8 +72,8 @@ const CustomSoftware = (props) => {
       </Grid>
       <Grid item>
         <img
-          alt="Custom Software Icon"
-          src={customSoftwareIcon}
+          alt="Mobile phone icon"
+          src={mobileAppsIcon}
           className={classes.icon}
         />
       </Grid>
@@ -84,4 +81,4 @@ const CustomSoftware = (props) => {
   );
 };
 
-export default CustomSoftware;
+export default AppDevelopment;

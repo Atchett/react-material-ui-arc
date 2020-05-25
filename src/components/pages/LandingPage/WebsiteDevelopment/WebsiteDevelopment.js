@@ -6,25 +6,21 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
-import customSoftwareIcon from "../../../../assets/Custom Software Icon.svg";
+import websiteIcon from "../../../../assets/websiteIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
-  serviceContainer: {
+  websiteContainer: {
     marginTop: "12em",
     [theme.breakpoints.down("sm")]: {
       padding: 25,
     },
   },
-  serviceText: {
+  websiteText: {
     marginLeft: "5em",
     [theme.breakpoints.down("xs")]: {
       marginLeft: 0,
       textAlign: "center",
     },
-  },
-  specialText: {
-    fontFamily: "Pacifico",
-    color: theme.palette.common.orange,
   },
   learnButton: {
     ...theme.typography.learnButton,
@@ -44,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomSoftware = (props) => {
+const WebsiteDevelopment = (props) => {
   const { matchesSm, theme } = props;
   const classes = useStyles();
 
@@ -52,17 +48,16 @@ const CustomSoftware = (props) => {
     <Grid
       container
       direction="row"
-      className={classes.serviceContainer}
+      className={classes.websiteContainer}
       justify={matchesSm ? "center" : undefined}
     >
-      <Grid item className={classes.serviceText}>
-        <Typography variant="h4">Custom Software Development</Typography>
+      <Grid item className={classes.websiteText}>
+        <Typography variant="h4">Website Development</Typography>
         <Typography variant="subtitle1">
-          Save Energy. Save Time. Save Money.
+          Reach More. Discover More. Sell More.
         </Typography>
         <Typography variant="subtitle1" className={classes.subtitle}>
-          Complete digital solutions, from investigation to{" "}
-          <span className={classes.specialText}>celebration</span>.
+          Optimized for search engines, built for speed.
         </Typography>
         <Button variant="outlined" className={classes.learnButton}>
           <span style={{ marginRight: 10 }}>Learn More</span>
@@ -74,14 +69,10 @@ const CustomSoftware = (props) => {
         </Button>
       </Grid>
       <Grid item>
-        <img
-          alt="Custom Software Icon"
-          src={customSoftwareIcon}
-          className={classes.icon}
-        />
+        <img alt="Website Icon" src={websiteIcon} className={classes.icon} />
       </Grid>
     </Grid>
   );
 };
 
-export default CustomSoftware;
+export default WebsiteDevelopment;

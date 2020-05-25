@@ -1,10 +1,15 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import HeroBlock from "./HeroBlock/HeroBlock";
 import CustomSoftware from "./CustomSoftware/CustomSoftware";
+import AppDevelopment from "./AppDevelopment/AppDevelopment";
+import WebsiteDevelopment from "./WebsiteDevelopment/WebsiteDevelopment";
+import Revolution from "./Revolution/Revolution";
+import InformationBlock from "./InformationBlock/InformationBlock";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -20,14 +25,29 @@ const useStyles = makeStyles((theme) => ({
 
 const LandingPage = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
     <Grid container direction="column" className={classes.mainContainer}>
       <Grid item>
-        <HeroBlock />
+        <HeroBlock theme={theme} />
       </Grid>
       <Grid item>
-        <CustomSoftware />
+        <CustomSoftware theme={theme} matchesSm={matchesSm} />
+      </Grid>
+      <Grid item>
+        <AppDevelopment theme={theme} matchesSm={matchesSm} />
+      </Grid>
+      <Grid item>
+        <WebsiteDevelopment theme={theme} matchesSm={matchesSm} />
+      </Grid>
+      <Grid item>
+        <Revolution theme={theme} />
+      </Grid>
+      <Grid item>
+        <InformationBlock matchesXS={matchesXS} />
       </Grid>
     </Grid>
   );
