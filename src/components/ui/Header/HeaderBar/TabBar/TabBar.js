@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
@@ -43,6 +43,7 @@ const TabBar = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { value, setValue, selectedIndex, setSelectedIndex } = props;
+  const location = useLocation();
 
   const theme = useTheme();
 
@@ -131,7 +132,7 @@ const TabBar = (props) => {
   ];
 
   useEffect(() => {
-    const pathName = window.location.pathname;
+    const pathName = location.pathname;
 
     [...menuOptions, ...routes].forEach((route) => {
       switch (pathName) {
@@ -157,6 +158,7 @@ const TabBar = (props) => {
     selectedIndex,
     setSelectedIndex,
     tabChangeHandler,
+    location,
   ]);
 
   const tabs = (
