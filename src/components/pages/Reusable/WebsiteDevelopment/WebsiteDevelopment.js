@@ -22,13 +22,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 10,
   },
   websiteContainer: {
-    marginTop: "12em",
+    marginTop: "10em",
     [theme.breakpoints.down("sm")]: {
       padding: 25,
     },
   },
   websiteText: {
-    [theme.breakpoints.down("xs")]: {
+    width: "35em",
+    [theme.breakpoints.down("sm")]: {
+      width: "inherit",
       textAlign: "center",
     },
   },
@@ -37,19 +39,19 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     marginLeft: "2em",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       marginLeft: 0,
     },
   },
   marginRight: {
     marginRight: "5em",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       marginRight: 0,
     },
   },
   marginLeft: {
     marginLeft: "5em",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       marginLeft: 0,
     },
   },
@@ -106,6 +108,7 @@ const WebsiteDevelopment = (props) => {
           className={
             floatRight ? clsx(classes.marginRight, classes.icon) : classes.icon
           }
+          width="250em"
         />
       </Grid>
     </Grid>
