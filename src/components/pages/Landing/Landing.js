@@ -5,12 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import HeroBlock from "./HeroBlock/HeroBlock";
-import CustomSoftware from "./CustomSoftware/CustomSoftware";
-import AppDevelopment from "./AppDevelopment/AppDevelopment";
-import WebsiteDevelopment from "./WebsiteDevelopment/WebsiteDevelopment";
+import CustomSoftware from "../Reusable/CustomSoftware/CustomSoftware";
+import AppDevelopment from "../Reusable/AppDevelopment/AppDevelopment";
+import WebsiteDevelopment from "../Reusable/WebsiteDevelopment/WebsiteDevelopment";
 import Revolution from "./Revolution/Revolution";
 import InformationBlock from "./InformationBlock/InformationBlock";
-import CallToAction from "../../ui/CallToAction/CallToAction";
+import CallToAction from "../Reusable/CallToAction/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LandingPage = (props) => {
+const Landing = (props) => {
   const { setValue, setSelectedIndex } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -42,6 +42,7 @@ const LandingPage = (props) => {
           matchesSm={matchesSm}
           setValue={setValue}
           setSelectedIndex={setSelectedIndex}
+          floatRight={false}
         />
       </Grid>
       <Grid item>
@@ -50,6 +51,7 @@ const LandingPage = (props) => {
           matchesSm={matchesSm}
           setValue={setValue}
           setSelectedIndex={setSelectedIndex}
+          floatRight={true}
         />
       </Grid>
       <Grid item>
@@ -58,6 +60,7 @@ const LandingPage = (props) => {
           matchesSm={matchesSm}
           setValue={setValue}
           setSelectedIndex={setSelectedIndex}
+          floatRight={false}
         />
       </Grid>
       <Grid item>
@@ -73,4 +76,4 @@ const LandingPage = (props) => {
   );
 };
 
-export default LandingPage;
+export default Landing;

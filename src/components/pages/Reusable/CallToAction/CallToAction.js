@@ -6,9 +6,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import ButtonArrow from "../ButtonArrow/ButtonArrow";
-import backgroundImage from "../../../assets/background.jpg";
-import mobileBackgroundImage from "../../../assets/mobileBackground.jpg";
+import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
+import backgroundImage from "../../../../assets/background.jpg";
+import mobileBackgroundImage from "../../../../assets/mobileBackground.jpg";
 
 const useStyles = makeStyles((theme) => ({
   learnButton: {

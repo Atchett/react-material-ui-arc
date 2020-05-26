@@ -6,7 +6,8 @@ import theme from "./ui/Theme/Theme";
 
 import Header from "./ui/Header/Header";
 import Footer from "./ui/Footer/Footer";
-import LandingPage from "./pages/LandingPage/LandingPage";
+import LandingPage from "./pages/Landing/Landing";
+import ServicesPage from "./pages/Services/Services";
 
 const App = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -33,7 +34,17 @@ const App = () => {
               />
             )}
           />
-          <Route exact path="/services" component={() => <div>Services</div>} />
+          <Route
+            exact
+            path="/services"
+            render={(props) => (
+              <ServicesPage
+                {...props}
+                setValue={setTabValue}
+                setSelectedIndex={setSelectedMenuIndex}
+              />
+            )}
+          />
           <Route
             exact
             path="/customsoftware"

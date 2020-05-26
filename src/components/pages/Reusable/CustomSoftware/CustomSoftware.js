@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";
-import websiteIcon from "../../../../assets/websiteIcon.svg";
+import customSoftwareIcon from "../../../../assets/Custom Software Icon.svg";
 
 const useStyles = makeStyles((theme) => ({
   learnButton: {
@@ -20,18 +21,20 @@ const useStyles = makeStyles((theme) => ({
   learnButtonSpan: {
     marginRight: 10,
   },
-  websiteContainer: {
+  serviceContainer: {
     marginTop: "12em",
     [theme.breakpoints.down("sm")]: {
       padding: 25,
     },
   },
-  websiteText: {
-    marginLeft: "5em",
+  serviceText: {
     [theme.breakpoints.down("xs")]: {
-      marginLeft: 0,
       textAlign: "center",
     },
+  },
+  specialText: {
+    fontFamily: "Pacifico",
+    color: theme.palette.common.orange,
   },
   subtitle: {
     marginBottom: "1em",
@@ -42,35 +45,55 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
     },
   },
+  marginRight: {
+    marginRight: "5em",
+    [theme.breakpoints.down("xs")]: {
+      marginRight: 0,
+    },
+  },
+  marginLeft: {
+    marginLeft: "5em",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 0,
+    },
+  },
 }));
 
-const WebsiteDevelopment = (props) => {
-  const { matchesSm, theme, setValue, setSelectedIndex } = props;
+const CustomSoftware = (props) => {
+  const { matchesSm, theme, setValue, setSelectedIndex, floatRight } = props;
   const classes = useStyles();
 
   return (
     <Grid
       container
       direction="row"
-      className={classes.websiteContainer}
-      justify={matchesSm ? "center" : undefined}
+      className={classes.serviceContainer}
+      justify={matchesSm ? "center" : floatRight ? "flex-end" : undefined}
     >
-      <Grid item className={classes.websiteText}>
-        <Typography variant="h4">Website Development</Typography>
+      <Grid
+        item
+        className={
+          floatRight
+            ? classes.serviceText
+            : clsx(classes.serviceText, classes.marginLeft)
+        }
+      >
+        <Typography variant="h4">Custom Software Development</Typography>
         <Typography variant="subtitle1">
-          Reach More. Discover More. Sell More.
+          Save Energy. Save Time. Save Money.
         </Typography>
         <Typography variant="subtitle1" className={classes.subtitle}>
-          Optimized for search engines, built for speed.
+          Complete digital solutions, from investigation to{" "}
+          <span className={classes.specialText}>celebration</span>.
         </Typography>
         <Button
           variant="outlined"
           className={classes.learnButton}
           component={Link}
-          to="/websites"
+          to="/customsoftware"
           onClick={() => {
             setValue(1);
-            setSelectedIndex(3);
+            setSelectedIndex(1);
           }}
         >
           <span className={classes.learnButtonSpan}>Learn More</span>
@@ -82,10 +105,16 @@ const WebsiteDevelopment = (props) => {
         </Button>
       </Grid>
       <Grid item>
-        <img alt="Website Icon" src={websiteIcon} className={classes.icon} />
+        <img
+          alt="Custom Software Icon"
+          src={customSoftwareIcon}
+          className={
+            floatRight ? clsx(classes.marginRight, classes.icon) : classes.icon
+          }
+        />
       </Grid>
     </Grid>
   );
 };
 
-export default WebsiteDevelopment;
+export default CustomSoftware;
