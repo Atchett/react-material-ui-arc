@@ -1,9 +1,9 @@
 import React from "react";
 
-import { useTheme } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 
 import CustomSoftware from "../Reusable/CustomSoftware/CustomSoftware";
 import AppDevelopment from "../Reusable/AppDevelopment/AppDevelopment";
@@ -19,6 +19,14 @@ const useStyles = makeStyles((theme) => ({
   blockBottom: {
     marginBottom: "10em",
   },
+  headerTitle: {
+    marginLeft: "5em",
+    marginTop: "2em",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 0,
+      marginTop: "1em",
+    },
+  },
 }));
 
 const Services = (props) => {
@@ -29,8 +37,17 @@ const Services = (props) => {
 
   return (
     <Grid container direction="column">
+      <Grid item className={classes.headerTitle}>
+        <Typography
+          align={matchesSm ? "center" : undefined}
+          variant="h2"
+          gutterBottom
+        >
+          Services
+        </Typography>
+      </Grid>
       <Grid item className={classes.blockTop}>
-        <AppDevelopment
+        <CustomSoftware
           theme={theme}
           matchesSm={matchesSm}
           setValue={setValue}
@@ -39,7 +56,7 @@ const Services = (props) => {
         />
       </Grid>
       <Grid item>
-        <CustomSoftware
+        <AppDevelopment
           theme={theme}
           matchesSm={matchesSm}
           setValue={setValue}

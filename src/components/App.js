@@ -8,6 +8,7 @@ import Header from "./ui/Header/Header";
 import Footer from "./ui/Footer/Footer";
 import LandingPage from "./pages/Landing/Landing";
 import ServicesPage from "./pages/Services/Services";
+import CustomSoftware from "./pages/CustomSoftware/CustomSoftware";
 
 const App = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -48,7 +49,13 @@ const App = () => {
           <Route
             exact
             path="/customsoftware"
-            component={() => <div>Custom Software</div>}
+            render={(props) => (
+              <CustomSoftware
+                {...props}
+                setValue={setTabValue}
+                setSelectedIndex={setSelectedMenuIndex}
+              />
+            )}
           />
           <Route
             exact

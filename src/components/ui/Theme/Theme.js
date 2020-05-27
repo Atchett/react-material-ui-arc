@@ -46,11 +46,17 @@ const theme = createMuiTheme({
       fontWeight: 300,
       color: "white",
     },
+    body1: {
+      fontSize: "1.25em",
+      color: arcGrey,
+      fontWeight: 300,
+    },
     tab: {
       fontFamily: "Raleway",
       textTransform: "none",
       fontWeight: 700,
       fontSize: "1rem",
+      color: "white",
     },
     estimate: {
       fontFamily: "Pacifico",
