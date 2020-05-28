@@ -14,10 +14,14 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     maxWidth: "40em",
   },
-  arrowContainer: {
+  backArrow: {
     marginTop: "0.5em",
     marginRight: "1em",
     marginLeft: "-3.5em",
+  },
+  forwardArrow: {
+    marginTop: "0.5em",
+    marginLeft: "-1em",
   },
   arrowBackground: {
     "&:hover": {
@@ -32,7 +36,7 @@ const AboutCustomSoftware = (props) => {
   return (
     <Fragment>
       <Hidden mdDown>
-        <Grid item className={classes.arrowContainer}>
+        <Grid item className={classes.backArrow}>
           <IconButton
             className={classes.arrowBackground}
             component={Link}
@@ -89,7 +93,7 @@ const AboutCustomSoftware = (props) => {
         </Grid>
       </Grid>
       <Hidden mdDown>
-        <Grid item className={classes.arrowContainer}>
+        <Grid item className={classes.forwardArrow}>
           <IconButton
             className={classes.arrowBackground}
             component={Link}
