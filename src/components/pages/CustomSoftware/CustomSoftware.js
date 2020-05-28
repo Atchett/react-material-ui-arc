@@ -13,7 +13,15 @@ import CallToAction from "../../pages/Reusable/CallToAction/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
-    padding: "2em 5em 10em 5em",
+    paddingRight: "5em",
+    paddingLeft: "5em",
+    paddingTop: "2em",
+    paddingBottom: "10em",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "1em",
+      paddingRight: "1.5em",
+      paddingLeft: "1.5em",
+    },
   },
   containerSpacing: {
     marginTop: "10em",
@@ -25,14 +33,26 @@ const CustomSoftware = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Fragment>
-      <Grid container direction="column" className={classes.mainContainer}>
-        <Grid item container direction="row">
+      <Grid
+        container
+        direction="column"
+        className={classes.mainContainer}
+        wrap="nowrap"
+      >
+        <Grid
+          item
+          container
+          direction="row"
+          justify={matchesMd ? "center" : undefined}
+        >
           <AboutCustomSoftware
             setValue={setValue}
             setSelectedIndex={setSelectedIndex}
+            matchesMd={matchesMd}
           />
         </Grid>
         <Grid
@@ -42,33 +62,36 @@ const CustomSoftware = (props) => {
           justify="center"
           className={classes.containerSpacing}
         >
-          <Icons />
+          <Icons matchesSm={matchesSm} />
         </Grid>
         <Grid
           item
           container
-          direction="row"
+          direction={matchesMd ? "column" : "row"}
+          alignItems={matchesMd ? "center" : undefined}
           justify="space-between"
           className={classes.containerSpacing}
         >
-          <DigitalDocumentsScale />
+          <DigitalDocumentsScale matchesMd={matchesMd} matchesSm={matchesSm} />
         </Grid>
         <Grid
           item
           container
           direction="row"
           className={classes.containerSpacing}
+          wrap="nowrap"
         >
-          <RootCauseAnalysis />
+          <RootCauseAnalysis matchesSm={matchesSm} />
         </Grid>
         <Grid
           item
           container
-          direction="row"
+          direction={matchesMd ? "column" : "row"}
+          alignItems={matchesMd ? "center" : undefined}
           justify="space-between"
           className={classes.containerSpacing}
         >
-          <AutomationUIDesign />
+          <AutomationUIDesign matchesMd={matchesMd} matchesSm={matchesSm} />
         </Grid>
       </Grid>
       <CallToAction theme={theme} matchesSm={matchesSm} setValue={setValue} />

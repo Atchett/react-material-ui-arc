@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import clsx from "clsx";
 
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,9 +13,14 @@ const useStyles = makeStyles((theme) => ({
   iconContainer: {
     maxWidth: "40em",
   },
+  iconSpacing: {
+    marginTop: "2.5em",
+    marginBottom: "2.5em",
+  },
 }));
 
-const Icons = () => {
+const Icons = (props) => {
+  const { matchesSm } = props;
   const classes = useStyles();
   return (
     <Fragment>
@@ -24,7 +30,11 @@ const Icons = () => {
         direction="column"
         md
         alignItems="center"
-        className={classes.iconContainer}
+        className={
+          matchesSm
+            ? clsx(classes.iconContainer, classes.iconSpacing)
+            : classes.iconContainer
+        }
       >
         <Grid item>
           <Typography variant="h4">Save Energy</Typography>
@@ -39,7 +49,11 @@ const Icons = () => {
         direction="column"
         md
         alignItems="center"
-        className={classes.iconContainer}
+        className={
+          matchesSm
+            ? clsx(classes.iconContainer, classes.iconSpacing)
+            : classes.iconContainer
+        }
       >
         <Grid item>
           <Typography variant="h4">Save Time</Typography>
@@ -54,7 +68,11 @@ const Icons = () => {
         direction="column"
         md
         alignItems="center"
-        className={classes.iconContainer}
+        className={
+          matchesSm
+            ? clsx(classes.iconContainer, classes.iconSpacing)
+            : classes.iconContainer
+        }
       >
         <Grid item>
           <Typography variant="h4">Save Money</Typography>

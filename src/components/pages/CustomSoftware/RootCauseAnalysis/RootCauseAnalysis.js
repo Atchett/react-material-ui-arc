@@ -12,18 +12,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RootCauseAnalysis = () => {
+const RootCauseAnalysis = (props) => {
+  const { matchesSm } = props;
   const classes = useStyles();
 
   return (
-    <Grid item container direction="row">
-      <Grid item container direction="column" alignItems="center">
+    <Grid item container direction="row" wrap="nowrap">
+      <Grid item container direction="column" alignItems="center" wrap="nowrap">
         <Grid item>
           <img
             src={roots}
             alt="tree with roots extending out"
-            width="450em"
-            height="450em"
+            width={matchesSm ? "300em" : "450em"}
+            height={matchesSm ? "300em" : "450em"}
           />
         </Grid>
         <Grid item className={classes.itemContainer}>
