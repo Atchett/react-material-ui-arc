@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
-import automationAnimation from "../../../../animations/automationAnimation/data.json";
-import uiAnimation from "../../../../animations/uxAnimation/data";
+import automationAnimation from "../../../../../animations/automationAnimation/data.json";
+import uiAnimation from "../../../../../animations/uxAnimation/data";
 
-import Animation from "../../../ui/Animation/Animation";
+import Animation from "../../../../ui/Animation/Animation";
 
 const useStyles = makeStyles((theme) => ({
   itemContainer: {

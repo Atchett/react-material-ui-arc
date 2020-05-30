@@ -5,12 +5,11 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import AboutCustomSoftware from "./AboutCustomSoftware/AboutCustomSoftware";
+import AboutAppDevelopment from "./AboutAppDevelopment/AboutAppDevelopment";
+import IntegrationPlatform from "./IntegrationPlatform/IntegrationPlatform";
 import Icons from "./Icons/Icons";
-import DigitalDocumentsScale from "./DigitalDocumentsScale/DigitalDocumentsScale";
-import RootCauseAnalysis from "./RootCauseAnalysis/RootCauseAnalysis";
-import AutomationUIDesign from "./AutomationUIDesign/AutomationUIDesign";
-import CallToAction from "../../pages/Reusable/CallToAction/CallToAction";
+
+import CallToAction from "../../Reusable/CallToAction/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   rowContainer: {
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomSoftware = (props) => {
+const AppDevelopment = (props) => {
   const { setValue, setSelectedIndex } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -52,7 +51,7 @@ const CustomSoftware = (props) => {
           justify={matchesMd ? "center" : undefined}
           className={clsx(classes.rowContainer, classes.headerSpacing)}
         >
-          <AboutCustomSoftware
+          <AboutAppDevelopment
             setValue={setValue}
             setSelectedIndex={setSelectedIndex}
             matchesMd={matchesMd}
@@ -61,44 +60,24 @@ const CustomSoftware = (props) => {
         <Grid
           item
           container
-          direction="row"
+          direction={matchesSm ? "column" : "row"}
+          justify={matchesMd ? "center" : undefined}
+          className={clsx(classes.rowContainer, classes.containerSpacing)}
+        >
+          <IntegrationPlatform matchesSm={matchesSm} />
+        </Grid>
+        <Grid
+          item
+          container
+          direction={matchesMd ? "column" : "row"}
           justify="center"
-          className={clsx(classes.containerSpacing, classes.rowContainer)}
-        >
-          <Icons matchesSm={matchesSm} />
-        </Grid>
-        <Grid
-          item
-          container
-          direction={matchesMd ? "column" : "row"}
-          alignItems={matchesMd ? "center" : undefined}
-          justify="space-between"
-          className={clsx(classes.containerSpacing, classes.rowContainer)}
-        >
-          <DigitalDocumentsScale matchesMd={matchesMd} matchesSm={matchesSm} />
-        </Grid>
-        <Grid
-          item
-          container
-          direction="row"
-          className={clsx(classes.containerSpacing, classes.rowContainer)}
-          wrap="nowrap"
-        >
-          <RootCauseAnalysis matchesSm={matchesSm} />
-        </Grid>
-        <Grid
-          item
-          container
-          direction={matchesMd ? "column" : "row"}
-          alignItems={matchesMd ? "center" : undefined}
-          justify="space-between"
           className={clsx(
             classes.containerSpacing,
             classes.rowContainer,
             classes.preCTASpacing
           )}
         >
-          <AutomationUIDesign matchesMd={matchesMd} matchesSm={matchesSm} />
+          <Icons matchesSm={matchesSm} />
         </Grid>
       </Grid>
       <Grid item>
@@ -108,4 +87,4 @@ const CustomSoftware = (props) => {
   );
 };
 
-export default CustomSoftware;
+export default AppDevelopment;

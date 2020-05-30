@@ -8,7 +8,8 @@ import Header from "./ui/Header/Header";
 import Footer from "./ui/Footer/Footer";
 import LandingPage from "./pages/Landing/Landing";
 import ServicesPage from "./pages/Services/Services";
-import CustomSoftware from "./pages/CustomSoftware/CustomSoftware";
+import CustomSoftware from "./pages/Services/CustomSoftware/CustomSoftware";
+import AppDevelopment from "./pages/Services/AppDevelopment/AppDevelopment";
 
 const App = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -60,7 +61,13 @@ const App = () => {
           <Route
             exact
             path="/mobileapps"
-            component={() => <div>iOS/Android App Development</div>}
+            render={(props) => (
+              <AppDevelopment
+                {...props}
+                setValue={setTabValue}
+                setSelectedIndex={setSelectedMenuIndex}
+              />
+            )}
           />
           <Route exact path="/websites" component={() => <div>Websites</div>} />
           <Route

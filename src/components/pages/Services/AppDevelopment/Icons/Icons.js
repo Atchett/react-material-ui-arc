@@ -5,9 +5,9 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
-import lightbulb from "../../../../assets/bulb.svg";
-import cash from "../../../../assets/cash.svg";
-import stopwatch from "../../../../assets/stopwatch.svg";
+import swissKnife from "../../../../../assets/swissKnife.svg";
+import extendAccess from "../../../../../assets/extendAccess.svg";
+import increaseEngagement from "../../../../../assets/increaseEngagement.svg";
 
 const useStyles = makeStyles((theme) => ({
   iconContainer: {
@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
   iconSpacing: {
     marginTop: "2.5em",
     marginBottom: "2.5em",
+  },
+  extendAccessIcon: {
+    maxWidth: "28em",
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "15em",
+    },
   },
 }));
 
@@ -37,29 +43,16 @@ const Icons = (props) => {
         }
       >
         <Grid item>
-          <Typography variant="h4">Save Energy</Typography>
+          <Typography align="center" variant="h4" gutterBottom>
+            Extend Functionality
+          </Typography>
         </Grid>
         <Grid item>
-          <img src={lightbulb} alt="lightbulb" />
-        </Grid>
-      </Grid>
-      <Grid
-        item
-        container
-        direction="column"
-        md
-        alignItems="center"
-        className={
-          matchesSm
-            ? clsx(classes.iconContainer, classes.iconSpacing)
-            : classes.iconContainer
-        }
-      >
-        <Grid item>
-          <Typography variant="h4">Save Time</Typography>
-        </Grid>
-        <Grid item>
-          <img src={stopwatch} alt="stopwatch" />
+          <img
+            src={swissKnife}
+            className={classes.extendAccessIcon}
+            alt="Swiss Army Knife icon"
+          />
         </Grid>
       </Grid>
       <Grid
@@ -75,10 +68,37 @@ const Icons = (props) => {
         }
       >
         <Grid item>
-          <Typography variant="h4">Save Money</Typography>
+          <Typography align="center" variant="h4" gutterBottom>
+            Extend Access
+          </Typography>
         </Grid>
         <Grid item>
-          <img src={cash} alt="cash" />
+          <img
+            src={extendAccess}
+            alt="Tear off Icon"
+            className={classes.extendAccessIcon}
+          />
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="column"
+        md
+        alignItems="center"
+        className={
+          matchesSm
+            ? clsx(classes.iconContainer, classes.iconSpacing)
+            : classes.iconContainer
+        }
+      >
+        <Grid item>
+          <Typography align="center" variant="h4" gutterBottom>
+            Increase Engagement
+          </Typography>
+        </Grid>
+        <Grid item>
+          <img src={increaseEngagement} alt="App with notification icon" />
         </Grid>
       </Grid>
     </Fragment>

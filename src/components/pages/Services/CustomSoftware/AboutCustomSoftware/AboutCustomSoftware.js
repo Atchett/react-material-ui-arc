@@ -7,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 
-import backArrow from "../../../../assets/backArrow.svg";
-import forwardArrow from "../../../../assets/forwardArrow.svg";
+import backArrow from "../../../../../assets/backArrow.svg";
+import forwardArrow from "../../../../../assets/forwardArrow.svg";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
