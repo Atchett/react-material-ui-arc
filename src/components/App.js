@@ -10,6 +10,7 @@ import LandingPage from "./pages/Landing/Landing";
 import ServicesPage from "./pages/Services/Services";
 import CustomSoftware from "./pages/Services/CustomSoftware/CustomSoftware";
 import AppDevelopment from "./pages/Services/AppDevelopment/AppDevelopment";
+import WebsiteDevelopment from "./pages/Services/WebsiteDevelopment/WebsiteDevelopment";
 
 const App = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -69,7 +70,17 @@ const App = () => {
               />
             )}
           />
-          <Route exact path="/websites" component={() => <div>Websites</div>} />
+          <Route
+            exact
+            path="/websites"
+            render={(props) => (
+              <WebsiteDevelopment
+                {...props}
+                setValue={setTabValue}
+                setSelectedIndex={setSelectedMenuIndex}
+              />
+            )}
+          />
           <Route
             exact
             path="/revolution"
