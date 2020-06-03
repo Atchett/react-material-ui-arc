@@ -7,8 +7,14 @@ import { makeStyles } from "@material-ui/styles";
 import review from "../../../../assets/reviewIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  imageAlign: {
+    alignSelf: "center",
+  },
   revImage: {
     width: "100%",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "5em",
+    },
   },
   titleText: {
     color: "#000",
@@ -79,7 +85,7 @@ const Review = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item lg style={{ alignSelf: "center" }}>
+      <Grid item lg className={classes.imageAlign}>
         <img src={review} alt="magnifying glass" className={classes.revImage} />
       </Grid>
     </Fragment>

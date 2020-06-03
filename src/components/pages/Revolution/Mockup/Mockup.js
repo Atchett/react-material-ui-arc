@@ -7,9 +7,15 @@ import { makeStyles } from "@material-ui/styles";
 import mockup from "../../../../assets/mockupIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  imageAlign: {
+    alignSelf: "center",
+  },
   mockImage: {
     maxWidth: 1000,
     width: "100%",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "5em",
+    },
   },
   titleText: {
     color: "#000",
@@ -79,7 +85,7 @@ const Mockup = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item lg style={{ alignSelf: "center" }}>
+      <Grid item lg className={classes.imageAlign}>
         <img
           src={mockup}
           alt="basic web design outline"

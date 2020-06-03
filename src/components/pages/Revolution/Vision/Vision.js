@@ -9,7 +9,7 @@ import vision from "../../../../assets/vision.svg";
 const useStyles = makeStyles((theme) => ({
   visionImage: {
     marginRight: "5em",
-    maxWidth: "40em",
+    maxWidth: 500,
     marginBottom: 0,
     [theme.breakpoints.down("md")]: {
       marginRight: 0,

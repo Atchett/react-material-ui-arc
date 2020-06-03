@@ -7,9 +7,15 @@ import { makeStyles } from "@material-ui/styles";
 import maintain from "../../../../assets/maintainIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  imageAlign: {
+    alignSelf: "center",
+  },
   maintImage: {
     maxWidth: 500,
     width: "100%",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "5em",
+    },
   },
   titleText: {
     color: "#000",
@@ -79,7 +85,7 @@ const Maintain = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item lg style={{ alignSelf: "center" }}>
+      <Grid item lg className={classes.imageAlign}>
         <img
           src={maintain}
           alt="spanner tightening bolt"

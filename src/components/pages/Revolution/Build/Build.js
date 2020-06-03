@@ -7,11 +7,15 @@ import { makeStyles } from "@material-ui/styles";
 import build from "../../../../assets/buildIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  imageAlign: {
+    alignSelf: "center",
+  },
   buildImage: {
     maxWidth: 1000,
     width: "100%",
     [theme.breakpoints.down("md")]: {
       maxWidth: 700,
+      marginTop: "5em",
     },
   },
   titleText: {
@@ -111,7 +115,7 @@ const Build = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item lg style={{ alignSelf: "center" }}>
+      <Grid item lg className={classes.imageAlign}>
         <img
           src={build}
           alt="building construction site"

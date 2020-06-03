@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   colourBlock: {
-    height: "90em",
+    minHeight: "90em",
   },
 }));
 

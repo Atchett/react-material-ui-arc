@@ -7,9 +7,15 @@ import { makeStyles } from "@material-ui/styles";
 import consultation from "../../../../assets/consultationIcon.svg";
 
 const useStyles = makeStyles((theme) => ({
+  imageAlign: {
+    alignSelf: "center",
+  },
   consultImage: {
     maxWidth: 700,
     width: "100%",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "5em",
+    },
   },
   titleText: {
     color: "#000",
@@ -83,7 +89,7 @@ const Consultation = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item lg style={{ alignSelf: "center" }}>
+      <Grid item lg className={classes.imageAlign}>
         <img
           src={consultation}
           alt="handshake"

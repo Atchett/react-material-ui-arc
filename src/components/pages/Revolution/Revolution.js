@@ -18,6 +18,7 @@ import Launch from "./Launch/Launch";
 import Maintain from "./Maintain/Maintain";
 import Iterate from "./Iterate/Iterate";
 import GridBlock from "./GridBlock/GridBlock";
+import CallToAction from "../../pages/Reusable/CallToAction/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   rowContainer: {
@@ -27,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: "1.5em",
       paddingLeft: "1.5em",
     },
+  },
+  contentContainer: {
+    maxWidth: "40em",
   },
   headerTop: {
     marginTop: "2em",
@@ -44,20 +48,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Revolution = (props) => {
+  const { setValue } = props;
   const theme = useTheme();
   const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
 
   return (
     <Grid container direction="column">
-      <Grid item className={clsx(classes.rowContainer, classes.headerTop)}>
-        <Typography
-          align={matchesMd ? "center" : undefined}
-          variant="h2"
-          className={classes.headerFont}
+      <Grid
+        item
+        container
+        direction={matchesMd ? "column" : "row"}
+        className={clsx(classes.rowContainer, classes.headerTop)}
+        alignItems="center"
+      >
+        <Grid
+          item
+          container
+          direction="column"
+          lg
+          className={classes.contentContainer}
         >
-          The Revolution
-        </Typography>
+          <Grid item>
+            <Typography
+              align={matchesMd ? "center" : undefined}
+              variant="h2"
+              className={classes.headerFont}
+            >
+              The Revolution
+            </Typography>
+          </Grid>
+        </Grid>
       </Grid>
       <Grid
         item
@@ -130,6 +152,9 @@ const Revolution = (props) => {
       <GridBlock matchesMd={matchesMd} blockColour="#29abe2">
         <Iterate matchesMd={matchesMd} />
       </GridBlock>
+      <Grid item>
+        <CallToAction theme={theme} matchesSm={matchesSm} setValue={setValue} />
+      </Grid>
     </Grid>
   );
 };
