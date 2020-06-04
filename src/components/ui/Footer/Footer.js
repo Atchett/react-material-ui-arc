@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { Grid, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
 
 import footerAdornment from "../../../assets/Footer Adornment.svg";
 import SocialLinks from "./SocialLinks/SocialLinks";

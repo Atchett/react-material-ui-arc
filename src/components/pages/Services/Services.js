@@ -1,9 +1,7 @@
 import React from "react";
 
-import { Typography } from "@material-ui/core";
+import { Grid, Typography, useMediaQuery } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Grid from "@material-ui/core/Grid";
 
 import CustomSoftware from "../Reusable/CustomSoftware/CustomSoftware";
 import AppDevelopment from "../Reusable/AppDevelopment/AppDevelopment";

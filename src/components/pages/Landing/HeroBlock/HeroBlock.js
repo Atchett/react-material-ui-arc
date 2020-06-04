@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import { Typography } from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ButtonArrow from "../../../ui/ButtonArrow/ButtonArrow";

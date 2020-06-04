@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
 import clsx from "clsx";
 
-import { Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 import lightbulb from "../../../../../assets/bulb.svg";
 import cash from "../../../../../assets/cash.svg";

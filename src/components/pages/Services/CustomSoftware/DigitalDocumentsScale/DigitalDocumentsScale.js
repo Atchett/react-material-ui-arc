@@ -1,14 +1,13 @@
 import React, { Fragment } from "react";
 import clsx from "clsx";
 
+import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
+
+import Animation from "../../../../ui/Animation/Animation";
 
 import documentsAnimation from "../../../../../animations/documentsAnimation/data";
 import scaleAnimation from "../../../../../animations/scaleAnimation/data.json";
-
-import Animation from "../../../../ui/Animation/Animation";
 
 const useStyles = makeStyles((theme) => ({
   itemContainer: {

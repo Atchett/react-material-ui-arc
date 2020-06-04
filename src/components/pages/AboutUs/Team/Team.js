@@ -1,9 +1,7 @@
 import React, { Fragment } from "react";
 
+import { Grid, Typography, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
 
 import profile from "../../../../assets/founder.jpg";
 import yearbook from "../../../../assets/yearbook.svg";

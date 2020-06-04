@@ -1,8 +1,7 @@
 import React from "react";
 
+import { Grid, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import HeroBlock from "./HeroBlock/HeroBlock";
 import CustomSoftware from "../Reusable/CustomSoftware/CustomSoftware";

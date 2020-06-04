@@ -1,11 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
+import { Grid, IconButton, Hidden, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Hidden from "@material-ui/core/Hidden";
 
 import backArrow from "../../../../../assets/backArrow.svg";
 import forwardArrow from "../../../../../assets/forwardArrow.svg";

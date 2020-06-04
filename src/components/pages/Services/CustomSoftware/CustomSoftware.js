@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
 import clsx from "clsx";
 
+import { Grid, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import AboutCustomSoftware from "./AboutCustomSoftware/AboutCustomSoftware";
 import Icons from "./Icons/Icons";

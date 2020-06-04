@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import { Menu, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({

@@ -1,10 +1,8 @@
 import React, { Fragment } from "react";
 
-import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
+import { Grid, Typography } from "@material-ui/core";
 
 import integrationAnimation from "../../../../../animations/integrationAnimation/data.json";
-
 import Animation from "../../../../ui/Animation/Animation";
 
 const IntegrationPlatform = (props) => {

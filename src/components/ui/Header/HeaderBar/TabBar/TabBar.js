@@ -1,11 +1,8 @@
 import React, { Fragment, useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/styles";
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
+import { Button, IconButton, useMediaQuery } from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import TabLinks from "./TabLinks/TabLinks";

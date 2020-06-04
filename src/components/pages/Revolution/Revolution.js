@@ -1,10 +1,8 @@
 import React from "react";
 import clsx from "clsx";
 
-import { Typography } from "@material-ui/core";
+import { Grid, Typography, useMediaQuery } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Grid from "@material-ui/core/Grid";
 
 import Vision from "./Vision/Vision";
 import Technology from "./Technology/Technology";

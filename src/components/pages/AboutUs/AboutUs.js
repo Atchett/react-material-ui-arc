@@ -1,10 +1,8 @@
 import React from "react";
 import clsx from "clsx";
 
+import { Typography, Grid, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Grid from "@material-ui/core/Grid";
 
 import Team from "./Team/Team";
 import History from "./History/History";
