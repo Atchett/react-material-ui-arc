@@ -81,6 +81,11 @@ const theme = createMuiTheme({
       fontWeight: "bold",
       textDecoration: "none",
     },
+    caption: {
+      fontSize: "1rem",
+      fontWeight: 300,
+      color: arcGrey,
+    },
   },
 });
 

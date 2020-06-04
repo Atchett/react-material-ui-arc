@@ -12,6 +12,7 @@ import CustomSoftware from "./pages/Services/CustomSoftware/CustomSoftware";
 import AppDevelopment from "./pages/Services/AppDevelopment/AppDevelopment";
 import WebsiteDevelopment from "./pages/Services/WebsiteDevelopment/WebsiteDevelopment";
 import Revolution from "./pages/Revolution/Revolution";
+import AboutUs from "./pages/AboutUs/AboutUs";
 
 const App = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -93,7 +94,17 @@ const App = () => {
               />
             )}
           />
-          <Route exact path="/about" component={() => <div>About Us</div>} />
+          <Route
+            exact
+            path="/about"
+            render={(props) => (
+              <AboutUs
+                {...props}
+                setValue={setTabValue}
+                setSelectedIndex={setSelectedMenuIndex}
+              />
+            )}
+          />
           <Route
             exact
             path="/contact"
