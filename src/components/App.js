@@ -13,6 +13,7 @@ import AppDevelopment from "./pages/Services/AppDevelopment/AppDevelopment";
 import WebsiteDevelopment from "./pages/Services/WebsiteDevelopment/WebsiteDevelopment";
 import Revolution from "./pages/Revolution/Revolution";
 import AboutUs from "./pages/AboutUs/AboutUs";
+import Contact from "./pages/Contact/Contact";
 
 const App = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -108,7 +109,13 @@ const App = () => {
           <Route
             exact
             path="/contact"
-            component={() => <div>Contact Us</div>}
+            render={(props) => (
+              <Contact
+                {...props}
+                setValue={setTabValue}
+                setSelectedIndex={setSelectedMenuIndex}
+              />
+            )}
           />
           <Route exact path="/estimate" component={() => <div>Estimate</div>} />
         </Switch>
