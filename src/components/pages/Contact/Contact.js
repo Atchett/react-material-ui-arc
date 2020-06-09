@@ -40,6 +40,8 @@ const Contact = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesXs = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
     <Grid container direction="row">
@@ -53,7 +55,11 @@ const Contact = (props) => {
         xl={3}
         className={classes.formContainer}
       >
-        <Form matchesMd={matchesMd} />
+        <Form
+          matchesMd={matchesMd}
+          matchesXs={matchesXs}
+          matchesSm={matchesSm}
+        />
       </Grid>
       <Grid
         item
