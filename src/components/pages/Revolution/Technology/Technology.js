@@ -107,7 +107,6 @@ const Technology = (props) => {
       <Grid item container justify={matchesMd ? "center" : "flex-end"} lg>
         <Animation
           animationData={technologyAnimation}
-          isStopped={true}
           style={{ maxWidth: "40em", margin: 0 }}
         />
       </Grid>

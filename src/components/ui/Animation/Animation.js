@@ -6,14 +6,14 @@ const Animation = (props) => {
 
   const defaultOptions = {
     loop: true,
-    autoplay: true,
+    autoplay: false,
     animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
 
-  return <Lottie options={defaultOptions} {...props} />;
+  return <Lottie options={defaultOptions} isStopped={true} {...props} />;
 };
 
 export default Animation;

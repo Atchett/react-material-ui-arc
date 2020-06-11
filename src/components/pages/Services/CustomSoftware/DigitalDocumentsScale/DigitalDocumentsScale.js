@@ -71,7 +71,6 @@ const DigitalDocumentsScale = (props) => {
         <Grid item md>
           <Animation
             animationData={documentsAnimation}
-            isStopped={true}
             style={{ maxHeight: 275, maxWidth: 275, minHeight: 250 }}
           />
         </Grid>
@@ -86,7 +85,6 @@ const DigitalDocumentsScale = (props) => {
         <Grid item md>
           <Animation
             animationData={scaleAnimation}
-            isStopped={true}
             style={{ maxHeight: 260, maxWidth: 280 }}
           />
         </Grid>

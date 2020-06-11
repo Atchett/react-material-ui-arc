@@ -69,7 +69,6 @@ const AutomationUIDesign = (props) => {
         <Grid item md>
           <Animation
             animationData={automationAnimation}
-            isStopped={true}
             style={{ maxHeight: 290, maxWidth: 280 }}
           />
         </Grid>
@@ -84,7 +83,6 @@ const AutomationUIDesign = (props) => {
         <Grid item md>
           <Animation
             animationData={uiAnimation}
-            isStopped={true}
             style={{ maxHeight: 310, maxWidth: 155 }}
           />
         </Grid>

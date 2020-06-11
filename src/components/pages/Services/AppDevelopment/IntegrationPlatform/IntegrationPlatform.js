@@ -43,7 +43,6 @@ const IntegrationPlatform = (props) => {
       <Grid item md>
         <Animation
           animationData={integrationAnimation}
-          isStopped={true}
           style={{ maxWidth: "20em" }}
         />
       </Grid>
