@@ -117,7 +117,14 @@ const Form = (props) => {
     const sendMailFunctionUrl =
       "https://us-central1-material-ui-project-38625.cloudfunctions.net/sendMail";
     axios
-      .get(sendMailFunctionUrl)
+      .get(sendMailFunctionUrl, {
+        params: {
+          name: name,
+          email: email,
+          phone: phone,
+          message: message,
+        },
+      })
       .then((res) => {
         setLoading(false);
         setOpen(false);
