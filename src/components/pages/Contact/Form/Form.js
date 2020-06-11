@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import clsx from "clsx";
+import axios from "axios";
 
 import {
   Grid,
@@ -8,6 +9,8 @@ import {
   TextField,
   Dialog,
   DialogContent,
+  CircularProgress,
+  Snackbar,
 } from "@material-ui/core";
 
 import phoneIcon from "../../../../assets/phone.svg";
@@ -71,8 +74,14 @@ const Form = (props) => {
   const [phone, setPhone] = useState("");
   const [phoneHelper, setPhoneHelper] = useState("");
   const [message, setMessage] = useState("");
-
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
 
   const onChange = (event) => {
     let valid;
@@ -103,6 +112,32 @@ const Form = (props) => {
     }
   };
 
+  const onConfirm = () => {
+    setLoading(true);
+    const sendMailFunctionUrl =
+      "https://us-central1-material-ui-project-38625.cloudfunctions.net/sendMail";
+    axios
+      .get(sendMailFunctionUrl)
+      .then((res) => {
+        setLoading(false);
+        setOpen(false);
+        resetFields();
+        setAlert({
+          open: true,
+          message: "Message sent successfully",
+          backgroundColor: "#4bb543",
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        setAlert({
+          open: true,
+          message: `Message not sent. ${err.message}`,
+          backgroundColor: "#ff3232",
+        });
+      });
+  };
+
   const checkValid = () => {
     if (
       name.length === 0 ||
@@ -116,6 +151,21 @@ const Form = (props) => {
     }
     return false;
   };
+
+  const resetFields = () => {
+    setName("");
+    setEmail("");
+    setPhone("");
+    setMessage("");
+    return;
+  };
+
+  const buttonContents = (
+    <Fragment>
+      Send message
+      <img src={airplane} alt="paper airplane" style={{ marginLeft: "1em" }} />
+    </Fragment>
+  );
 
   return (
     <Fragment>
@@ -240,12 +290,7 @@ const Form = (props) => {
               disabled={checkValid()}
               onClick={() => setOpen(true)}
             >
-              Send message{" "}
-              <img
-                src={airplane}
-                alt="paper airplane"
-                style={{ marginLeft: "1em" }}
-              />
+              {buttonContents}
             </Button>
           </Grid>
         </Grid>
@@ -336,19 +381,22 @@ const Form = (props) => {
                 variant="contained"
                 className={classes.sendButton}
                 disabled={checkValid()}
-                onClick={() => setOpen(true)}
+                onClick={() => onConfirm()}
               >
-                Send message{" "}
-                <img
-                  src={airplane}
-                  alt="paper airplane"
-                  style={{ marginLeft: "1em" }}
-                />
+                {loading ? <CircularProgress size={30} /> : buttonContents}
               </Button>
             </Grid>
           </Grid>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+      />
     </Fragment>
   );
 };
