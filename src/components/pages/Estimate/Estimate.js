@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
+import { cloneDeep } from "lodash";
 
 import { Grid, Typography, Button, IconButton } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/styles";
@@ -6,30 +7,18 @@ import { makeStyles, useTheme } from "@material-ui/styles";
 import Animation from "../../ui/Animation/Animation";
 import estimateAnimation from "../../../animations/estimateAnimation/data.json";
 
+import {
+  defaultQuestions,
+  softwareQuestions,
+  websiteQuestions,
+} from "./questions";
+
 import check from "../../../assets/check.svg";
 import send from "../../../assets/send.svg";
-import software from "../../../assets/software.svg";
-import mobile from "../../../assets/mobile.svg";
-import website from "../../../assets/website.svg";
 import backArrow from "../../../assets/backArrow.svg";
 import backArrowDisabled from "../../../assets/backArrowDisabled.svg";
 import forwardArrow from "../../../assets/forwardArrow.svg";
 import forwardArrowDisabled from "../../../assets/forwardArrowDisabled.svg";
-import camera from "../../../assets/camera.svg";
-import upload from "../../../assets/upload.svg";
-import person from "../../../assets/person.svg";
-import persons from "../../../assets/persons.svg";
-import info from "../../../assets/info.svg";
-import bell from "../../../assets/bell.svg";
-import people from "../../../assets/people.svg";
-import usersIcon from "../../../assets/users.svg";
-import iPhone from "../../../assets/iphone.svg";
-import gps from "../../../assets/gps.svg";
-import customized from "../../../assets/customized.svg";
-import data from "../../../assets/data.svg";
-import android from "../../../assets/android.svg";
-import globe from "../../../assets/globe.svg";
-import biometrics from "../../../assets/biometrics.svg";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -53,6 +42,56 @@ const useStyles = makeStyles((theme) => ({
 const Estimate = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const [questions, setQuestions] = useState(softwareQuestions);
+
+  const nextQuestion = () => {
+    const newQuestions = cloneDeep(questions);
+    const currentlyActive = newQuestions.filter((question) => question.active);
+    const activeIndex = currentlyActive[0].id - 1;
+    const nextIndex = activeIndex + 1;
+    newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
+    newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
+    setQuestions(newQuestions);
+    navigationPrevDisabled();
+  };
+
+  const prevQuestion = () => {
+    const newQuestions = cloneDeep(questions);
+    const currentlyActive = newQuestions.filter((question) => question.active);
+    const activeIndex = currentlyActive[0].id - 1;
+    const nextIndex = activeIndex - 1;
+    newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
+    newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
+    setQuestions(newQuestions);
+    navigationNextDisabled();
+  };
+
+  const navigationPrevDisabled = () => {
+    const currentlyActive = questions.filter((question) => question.active);
+    if (currentlyActive[0].id === 1) {
+      return true;
+    }
+    return false;
+  };
+
+  const navigationNextDisabled = () => {
+    const currentlyActive = questions.filter((question) => question.active);
+    if (currentlyActive[0].id === questions[questions.length - 1].id) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleSelect = (id) => {
+    const newQuestions = cloneDeep(questions);
+    const currentlyActive = newQuestions.filter((question) => question.active);
+    const activeIndex = currentlyActive[0].id - 1;
+    const newSelected = newQuestions[activeIndex].options[id - 1];
+
+    newSelected.selected = !newSelected.selected;
+
+    setQuestions(newQuestions);
+  };
 
   return (
     <Grid container direction="row">
@@ -79,92 +118,109 @@ const Estimate = () => {
         lg
         style={{ marginRight: "2em", marginBottom: "25em" }}
       >
-        <Grid item>
-          <Typography
-            variant="h2"
-            align="center"
-            style={{
-              fontSize: "2.25rem",
-              fontWeight: 500,
-              marginBottom: "2.5m",
-              marginTop: "5em",
-            }}
-            gutterBottom
-          >
-            Which service are you interested in?
-          </Typography>
-        </Grid>
-        <Grid item container>
-          <Grid item container direction="column" md>
-            <Grid item style={{ maxWidth: "12em" }}>
-              <Typography
-                variant="h6"
-                align="center"
-                style={{ marginBottom: "1em" }}
-              >
-                Custom Software Development
-              </Typography>
-            </Grid>
-            <Grid item>
-              <img
-                src={software}
-                alt="three floating screens"
-                className={classes.icon}
-              />
-            </Grid>
-          </Grid>
-          <Grid item container direction="column" md>
-            <Grid item style={{ maxWidth: "12em" }}>
-              <Typography
-                variant="h6"
-                align="center"
-                style={{ marginBottom: "1em" }}
-              >
-                iOS / Android App Development
-              </Typography>
-            </Grid>
-            <Grid item>
-              <img
-                src={mobile}
-                alt="phones and tablet outline"
-                className={classes.icon}
-              />
-            </Grid>
-          </Grid>
-          <Grid item container direction="column" md>
-            <Grid item style={{ maxWidth: "12em" }}>
-              <Typography
-                variant="h6"
-                align="center"
-                style={{ marginBottom: "1em" }}
-              >
-                Website Development
-              </Typography>
-            </Grid>
-            <Grid item>
-              <img
-                src={website}
-                alt="computer outline"
-                className={classes.icon}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
+        {questions
+          .filter((question) => question.active)
+          .map((question, index) => (
+            <Fragment key={`${question.id}-${index}`}>
+              <Grid item>
+                <Typography
+                  variant="h2"
+                  align="center"
+                  style={{
+                    fontSize: "2.25rem",
+                    fontWeight: 500,
+                    marginTop: "5em",
+                    lineHeight: "1.25",
+                  }}
+                >
+                  {question.title}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  align="center"
+                  style={{ marginBottom: "2.5em" }}
+                  gutterBottom
+                >
+                  {question.subtitle}
+                </Typography>
+              </Grid>
+              <Grid item container>
+                {question.options.map((option, index) => (
+                  <Grid
+                    key={`${option.id}-${index}`}
+                    item
+                    container
+                    direction="column"
+                    md
+                    component={Button}
+                    onClick={() => handleSelect(option.id)}
+                    style={{
+                      display: "grid",
+                      textTransform: "none",
+                      borderRadius: 0,
+                      backgroundColor: option.selected
+                        ? theme.palette.common.orange
+                        : null,
+                    }}
+                  >
+                    <Grid item style={{ maxWidth: "14em" }}>
+                      <Typography
+                        variant="h6"
+                        align="center"
+                        style={{ marginBottom: "1em" }}
+                      >
+                        {option.title}
+                      </Typography>
+                      <Typography variant="caption" align="center">
+                        {option.subtitle}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <img
+                        src={option.icon}
+                        alt={option.iconAlt}
+                        className={classes.icon}
+                      />
+                    </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+            </Fragment>
+          ))}
+
         <Grid
           item
           container
           justify="space-between"
-          style={{ width: "15em", marginTop: "3em" }}
+          style={{ width: "18em", marginTop: "3em" }}
         >
           <Grid item>
-            <img src={backArrow} alt="previous question" />
+            <IconButton
+              disabled={navigationPrevDisabled()}
+              onClick={prevQuestion}
+            >
+              <img
+                src={navigationPrevDisabled() ? backArrowDisabled : backArrow}
+                alt="previous question"
+              />
+            </IconButton>
           </Grid>
           <Grid item>
-            <img src={forwardArrow} alt="next question" />
+            <IconButton
+              disabled={navigationNextDisabled()}
+              onClick={nextQuestion}
+            >
+              <img
+                src={
+                  navigationNextDisabled() ? forwardArrowDisabled : forwardArrow
+                }
+                alt="next question"
+              />
+            </IconButton>
           </Grid>
         </Grid>
         <Grid item>
-          <Button variant="container" className={classes.estimateButton}>
+          <Button variant="contained" className={classes.estimateButton}>
             Get Estimate
           </Button>
         </Grid>
