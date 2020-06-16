@@ -1,8 +1,16 @@
 import React, { Fragment, useState } from "react";
 import { cloneDeep } from "lodash";
 
-import { Grid, Typography, Button, IconButton } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Button,
+  IconButton,
+  useMediaQuery,
+} from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/styles";
+
+import Modal from "./Modal/Modal";
 
 import Animation from "../../ui/Animation/Animation";
 import estimateAnimation from "../../../animations/estimateAnimation/data.json";
@@ -12,9 +20,15 @@ import {
   softwareQuestions,
   websiteQuestions,
 } from "./questions";
+import {
+  getCategory,
+  getTotal,
+  getCustomFeatures,
+  getFeatures,
+  getPlatforms,
+  getUsers,
+} from "./estimateFunctions";
 
-import check from "../../../assets/check.svg";
-import send from "../../../assets/send.svg";
 import backArrow from "../../../assets/backArrow.svg";
 import backArrowDisabled from "../../../assets/backArrowDisabled.svg";
 import forwardArrow from "../../../assets/forwardArrow.svg";
@@ -42,7 +56,18 @@ const useStyles = makeStyles((theme) => ({
 const Estimate = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const [questions, setQuestions] = useState(softwareQuestions);
+  const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [questions, setQuestions] = useState(defaultQuestions);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [service, setService] = useState([]);
+  const [platforms, setPlatforms] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [customFeatures, setCustomFeatures] = useState("");
+  const [category, setCategory] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const nextQuestion = () => {
     const newQuestions = cloneDeep(questions);
@@ -87,21 +112,85 @@ const Estimate = () => {
     const currentlyActive = newQuestions.filter((question) => question.active);
     const activeIndex = currentlyActive[0].id - 1;
     const newSelected = newQuestions[activeIndex].options[id - 1];
+    // array of any active questions
+    const prevSelected = currentlyActive[0].options.filter(
+      (option) => option.selected
+    );
 
-    newSelected.selected = !newSelected.selected;
+    switch (currentlyActive[0].subtitle) {
+      case "Select one.":
+        if (prevSelected[0]) {
+          prevSelected[0].selected = !prevSelected[0].selected;
+        }
+        newSelected.selected = !newSelected.selected;
+        break;
+      default:
+        newSelected.selected = !newSelected.selected;
+        break;
+    }
 
-    setQuestions(newQuestions);
+    switch (newSelected.title) {
+      case "Custom Software Development":
+      case "iOS / Android App Development":
+        setQuestions(softwareQuestions);
+        setService(newSelected.title);
+        resetAnswers();
+        break;
+      case "Website Development":
+        setQuestions(websiteQuestions);
+        setService(newSelected.title);
+        resetAnswers();
+        break;
+      default:
+        setQuestions(newQuestions);
+        break;
+    }
+  };
+
+  const resetAnswers = () => {
+    setPlatforms([]);
+    setFeatures([]);
+    setCustomFeatures("");
+    setCategory("");
+    setUsers("");
+    return;
+  };
+
+  const getEstimate = () => {
+    setDialogOpen(true);
+    setTotal(getTotal(questions));
+    setPlatforms(getPlatforms(questions));
+    setFeatures(getFeatures(questions));
+    setCategory(getCategory(questions));
+    setCustomFeatures(getCustomFeatures(questions));
+    setUsers(getUsers(questions));
+    return;
   };
 
   return (
     <Grid container direction="row">
-      <Grid item container direction="column" lg>
-        <Grid item style={{ marginTop: "2em", marginLeft: "5em" }}>
-          <Typography variant="h2">Estimate</Typography>
+      <Grid
+        item
+        container
+        direction="column"
+        lg
+        alignItems={matchesMd ? "center" : undefined}
+      >
+        <Grid
+          item
+          style={{ marginTop: "2em", marginLeft: matchesMd ? 0 : "5em" }}
+        >
+          <Typography variant="h2" align={matchesMd ? "center" : undefined}>
+            Estimate
+          </Typography>
         </Grid>
         <Grid
           item
-          style={{ marginRight: "10em", maxWidth: "50em", marginTop: "7.5em" }}
+          style={{
+            marginRight: matchesMd ? 0 : "10em",
+            maxWidth: "50em",
+            marginTop: "7.5em",
+          }}
         >
           <Animation
             animationData={estimateAnimation}
@@ -116,7 +205,7 @@ const Estimate = () => {
         direction="column"
         alignItems="center"
         lg
-        style={{ marginRight: "2em", marginBottom: "25em" }}
+        style={{ marginRight: matchesMd ? 0 : "2em", marginBottom: "25em" }}
       >
         {questions
           .filter((question) => question.active)
@@ -131,6 +220,8 @@ const Estimate = () => {
                     fontWeight: 500,
                     marginTop: "5em",
                     lineHeight: "1.25",
+                    marginLeft: matchesSm ? "1em" : 0,
+                    marginRight: matchesSm ? "1em" : 0,
                   }}
                 >
                   {question.title}
@@ -161,6 +252,7 @@ const Estimate = () => {
                       backgroundColor: option.selected
                         ? theme.palette.common.orange
                         : null,
+                      marginBottom: matchesSm ? "1.5em" : 0,
                     }}
                   >
                     <Grid item style={{ maxWidth: "14em" }}>
@@ -220,11 +312,30 @@ const Estimate = () => {
           </Grid>
         </Grid>
         <Grid item>
-          <Button variant="contained" className={classes.estimateButton}>
+          <Button
+            variant="contained"
+            className={classes.estimateButton}
+            onClick={() => {
+              getEstimate();
+            }}
+          >
             Get Estimate
           </Button>
         </Grid>
       </Grid>
+      <Modal
+        isDialogOpen={dialogOpen}
+        changeDialogState={setDialogOpen}
+        total={total}
+        service={service}
+        platforms={platforms}
+        features={features}
+        customFeatures={customFeatures}
+        category={category}
+        users={users}
+        questions={questions}
+        matchesSm={matchesSm}
+      />
     </Grid>
   );
 };

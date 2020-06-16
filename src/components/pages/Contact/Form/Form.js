@@ -13,6 +13,11 @@ import {
   Snackbar,
 } from "@material-ui/core";
 
+import {
+  emailFieldValidation,
+  phoneNumberValidation,
+} from "../../../../helpers/formFieldValidation";
+
 import phoneIcon from "../../../../assets/phone.svg";
 import emailIcon from "../../../../assets/email.svg";
 import airplane from "../../../../assets/send.svg";
@@ -56,7 +61,10 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: "bottom",
   },
   fieldItemWidth: {
-    maxWidth: "20em",
+    width: "20em",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+    },
   },
   removeLinkStyle: {
     textDecoration: "none",
@@ -89,9 +97,7 @@ const Form = (props) => {
     switch (event.target.id) {
       case "email":
         setEmail(event.target.value);
-        valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
-          event.target.value
-        );
+        valid = emailFieldValidation(event.target.value);
         setEmailHelper("");
         if (!valid) {
           setEmailHelper("Invalid email");
@@ -99,9 +105,7 @@ const Form = (props) => {
         break;
       case "phone":
         setPhone(event.target.value);
-        valid = /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?(\d{4}|\d{3}))?$/.test(
-          event.target.value
-        );
+        valid = phoneNumberValidation(event.target.value);
         setPhoneHelper("");
         if (!valid) {
           setPhoneHelper("Invalid phone number");
@@ -306,7 +310,7 @@ const Form = (props) => {
         style={{ zIndex: 1302 }}
         open={open}
         onClose={() => setOpen(false)}
-        fullScreen={matchesXs}
+        fullScreen={matchesSm}
         PaperProps={{
           style: {
             paddingTop: matchesXs ? "1em" : "2em",
