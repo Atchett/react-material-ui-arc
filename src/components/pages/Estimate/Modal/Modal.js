@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
+import axios from "axios";
 
 import {
   Grid,
@@ -8,6 +9,8 @@ import {
   DialogContent,
   TextField,
   Hidden,
+  Snackbar,
+  CircularProgress,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import {
@@ -73,6 +76,13 @@ const Modal = (props) => {
   const [emailHelper, setEmailHelper] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneHelper, setPhoneHelper] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
 
   const onChange = (event) => {
     let valid;
@@ -218,136 +228,215 @@ const Modal = (props) => {
     </Grid>
   );
 
+  const sendEstimate = () => {
+    setLoading(true);
+    const sendMailFunctionUrl =
+      "https://us-central1-material-ui-project-38625.cloudfunctions.net/sendMail";
+    axios
+      .get(sendMailFunctionUrl, {
+        params: {
+          name: name,
+          email: email,
+          phone: phone,
+          message: message,
+          total: total,
+          category: category,
+          service: service,
+          platforms: platforms,
+          features: features,
+          customFeatures: customFeatures,
+          users: users,
+        },
+      })
+      .then((res) => {
+        setLoading(false);
+        setAlert({
+          open: true,
+          message: "Estimate request sent successfully",
+          backgroundColor: "#4bb543",
+        });
+        changeDialogState(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        setAlert({
+          open: true,
+          message: `Estimate not sent. ${err.message}`,
+          backgroundColor: "#ff3232",
+        });
+      });
+  };
+
+  const checkValid = () => {
+    if (
+      name.length === 0 ||
+      message.length === 0 ||
+      email.length === 0 ||
+      phone.length === 0 ||
+      emailHelper.length !== 0 ||
+      phoneHelper.length !== 0
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
-    <Dialog
-      open={isDialogOpen}
-      onClose={() => changeDialogState(false)}
-      fullWidth
-      maxWidth="lg"
-      fullScreen={matchesSm}
-      style={{ zIndex: 1302 }}
-    >
-      <Grid container justify="center">
-        <Grid item style={{ marginTop: "1em", marginBottom: "1em" }}>
-          <Typography variant="h2" align="center">
-            Estimate
-          </Typography>
-        </Grid>
-      </Grid>
-      <DialogContent>
-        <Grid
-          container
-          justify="space-around"
-          direction={matchesSm ? "column" : "row"}
-          alignItems={matchesSm ? "center" : undefined}
-        >
-          <Grid
-            item
-            container
-            direction="column"
-            md={7}
-            style={{ maxWidth: "20em" }}
-          >
-            <Grid item className={classes.fieldBlockMargin}>
-              <TextField
-                label="Name"
-                id="name"
-                fullWidth
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Grid>
-            <Grid item className={classes.fieldBlockMargin}>
-              <TextField
-                label="Email"
-                error={emailHelper.length !== 0}
-                helperText={emailHelper}
-                id="email"
-                fullWidth
-                value={email}
-                onChange={onChange}
-              />
-            </Grid>
-            <Grid item style={{ marginBottom: "0.5em" }}>
-              <TextField
-                label="Phone"
-                error={phoneHelper.length !== 0}
-                helperText={phoneHelper}
-                id="phone"
-                fullWidth
-                value={phone}
-                onChange={onChange}
-              />
-            </Grid>
-            <Grid item className={classes.fieldItemWidth}>
-              <TextField
-                multiline
-                InputProps={{ disableUnderline: true }}
-                rows={10}
-                id="message"
-                fullWidth
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className={classes.message}
-              />
-            </Grid>
-            <Grid item>
-              <Typography
-                variant="body1"
-                paragraph
-                align={matchesSm ? "center" : undefined}
-              >
-                We can create this digital solution for an estimated{" "}
-                <span className={classes.specialText}>£{total.toFixed(2)}</span>
-              </Typography>
-              <Typography
-                variant="body1"
-                paragraph
-                align={matchesSm ? "center" : undefined}
-              >
-                Fill out your name, phone number and email, place your request
-                and we'll get back to you with a final price.
-              </Typography>
-            </Grid>
+    <Fragment>
+      <Dialog
+        open={isDialogOpen}
+        onClose={() => changeDialogState(false)}
+        fullWidth
+        maxWidth="lg"
+        fullScreen={matchesSm}
+        style={{ zIndex: 1302 }}
+      >
+        <Grid container justify="center">
+          <Grid item style={{ marginTop: "1em", marginBottom: "1em" }}>
+            <Typography variant="h2" align="center">
+              Estimate
+            </Typography>
           </Grid>
+        </Grid>
+        <DialogContent>
           <Grid
-            item
             container
-            direction="column"
-            md={5}
-            style={{ maxWidth: "30em" }}
+            justify="space-around"
+            direction={matchesSm ? "column" : "row"}
             alignItems={matchesSm ? "center" : undefined}
           >
-            <Hidden smDown>
-              <Grid item>
-                {questions.length > 2 ? softwareSelection : websiteSelection}
-              </Grid>
-            </Hidden>
-            <Grid item>
-              <Button variant="contained" className={classes.estimateButton}>
-                Place request
-                <img
-                  src={send}
-                  alt="paper airplane"
-                  style={{ marginLeft: "0.5em" }}
+            <Grid
+              item
+              container
+              direction="column"
+              md={7}
+              style={{ maxWidth: "20em" }}
+            >
+              <Grid item className={classes.fieldBlockMargin}>
+                <TextField
+                  label="Name"
+                  id="name"
+                  fullWidth
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
-              </Button>
-            </Grid>
-            <Hidden mdUp>
-              <Grid item style={{ marginBottom: matchesSm ? "5em" : 0 }}>
-                <Button
-                  style={{ fontWeight: 300 }}
-                  color="primary"
-                  onClick={() => changeDialogState(false)}
+              </Grid>
+              <Grid item className={classes.fieldBlockMargin}>
+                <TextField
+                  label="Email"
+                  error={emailHelper.length !== 0}
+                  helperText={emailHelper}
+                  id="email"
+                  fullWidth
+                  value={email}
+                  onChange={onChange}
+                />
+              </Grid>
+              <Grid item style={{ marginBottom: "0.5em" }}>
+                <TextField
+                  label="Phone"
+                  error={phoneHelper.length !== 0}
+                  helperText={phoneHelper}
+                  id="phone"
+                  fullWidth
+                  value={phone}
+                  onChange={onChange}
+                />
+              </Grid>
+              <Grid item className={classes.fieldItemWidth}>
+                <TextField
+                  multiline
+                  InputProps={{ disableUnderline: true }}
+                  placeholder="Tell us more about your project"
+                  rows={10}
+                  id="message"
+                  fullWidth
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className={classes.message}
+                />
+              </Grid>
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  paragraph
+                  align={matchesSm ? "center" : undefined}
+                  style={{ lineHeight: 1.25 }}
                 >
-                  Cancel
+                  We can create this digital solution for an estimated{" "}
+                  <span className={classes.specialText}>
+                    £{total.toFixed(2)}
+                  </span>
+                </Typography>
+                <Typography
+                  variant="body1"
+                  paragraph
+                  align={matchesSm ? "center" : undefined}
+                >
+                  Fill out your name, phone number and email, place your request
+                  and we'll get back to you with a final price.
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              container
+              direction="column"
+              md={5}
+              style={{ maxWidth: "30em" }}
+              alignItems={matchesSm ? "center" : undefined}
+            >
+              <Hidden smDown>
+                <Grid item>
+                  {questions.length > 2 ? softwareSelection : websiteSelection}
+                </Grid>
+              </Hidden>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  className={classes.estimateButton}
+                  onClick={sendEstimate}
+                  disabled={checkValid()}
+                >
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Fragment>
+                      Place request
+                      <img
+                        src={send}
+                        alt="paper airplane"
+                        style={{ marginLeft: "0.5em" }}
+                      />
+                    </Fragment>
+                  )}
                 </Button>
               </Grid>
-            </Hidden>
+              <Hidden mdUp>
+                <Grid item style={{ marginBottom: matchesSm ? "5em" : 0 }}>
+                  <Button
+                    style={{ fontWeight: 300 }}
+                    color="primary"
+                    onClick={() => changeDialogState(false)}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </Hidden>
+            </Grid>
           </Grid>
-        </Grid>
-      </DialogContent>
-    </Dialog>
+        </DialogContent>
+      </Dialog>
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+      />
+    </Fragment>
   );
 };
 

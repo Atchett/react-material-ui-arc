@@ -140,6 +140,7 @@ const Form = (props) => {
         });
       })
       .catch((err) => {
+        console.error(err);
         setLoading(false);
         setAlert({
           open: true,
@@ -281,6 +282,7 @@ const Form = (props) => {
             <TextField
               multiline
               InputProps={{ disableUnderline: true }}
+              placeholder="Tell us more about your project"
               rows={10}
               id="message"
               fullWidth
